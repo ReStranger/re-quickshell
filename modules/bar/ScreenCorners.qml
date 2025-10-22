@@ -1,0 +1,46 @@
+import QtQuick
+import qs.components
+import qs.config
+
+Item {
+    implicitHeight: Theme.rounding.screenRounding
+    RoundCorner {
+        id: leftCorner
+        anchors {
+            top: parent.top
+            left: parent.left
+            bottom: parent.bottom
+        }
+
+        implicitSize: Theme.rounding.screenRounding
+        color: Config.options.bar.showBackground ? Theme.color.bg00 : "transparent"
+
+        corner: RoundCorner.CornerEnum.TopLeft
+        states: State {
+            name: "bottom"
+            when: Config.options.bar.bottom
+            PropertyChanges {
+                leftCorner.corner: RoundCorner.CornerEnum.BottomLeft
+            }
+        }
+    }
+    RoundCorner {
+        id: rightCorner
+        anchors {
+            right: parent.right
+            top: !Config.options.bar.bottom ? parent.top : undefined
+            bottom: Config.options.bar.bottom ? parent.bottom : undefined
+        }
+        implicitSize: Theme.rounding.screenRounding
+        color: Config.options.bar.showBackground ? Theme.color.bg00 : "transparent"
+
+        corner: RoundCorner.CornerEnum.TopRight
+        states: State {
+            name: "bottom"
+            when: Config.options.bar.bottom
+            PropertyChanges {
+                rightCorner.corner: RoundCorner.CornerEnum.BottomRight
+            }
+        }
+    }
+}
