@@ -91,6 +91,14 @@ Singleton {
                 property bool automaticSuspend: true
                 property int suspend: 3
             }
+            property JsonObject qs: JsonObject {
+                property JsonObject buttonEnable: JsonObject {
+                    property bool wifi: true
+                    property bool bluetooth: true
+                    property bool powerProfile: true
+                    property bool dnd: true
+                }
+            }
         }
     }
 }
