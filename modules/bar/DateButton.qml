@@ -32,19 +32,21 @@ StyledButton {
         MaterialSymbol {
             id: clockIcon
             icon: "schedule"
-            color: Theme.color.fg
+            color: root.enabled ? (root.pressed ? Theme.color.bg00 : Theme.color.fg) : Theme.color.sf01
             font.pixelSize: 20
         }
 
         StyledText {
             id: clockText
             text: DateTime.time
+            color: root.enabled ? (root.pressed ? Theme.color.bg00 : Theme.color.fg) : Theme.color.sf01
             font.pixelSize: 16
         }
         StyledText {
             id: dot
             visible: root.isDateVisible
             text: "•"
+            color: root.enabled ? (root.pressed ? Theme.color.bg00 : Theme.color.fg) : Theme.color.sf01
             font.pixelSize: 20
         }
         StyledText {
@@ -57,6 +59,7 @@ StyledButton {
             opacity: root.isDateVisible ? 1 : 0
 
             text: Utils.capitalize(DateTime.date.weekDayShort) + " " + DateTime.date.shortDate
+            color: root.enabled ? (root.pressed ? Theme.color.bg00 : Theme.color.fg) : Theme.color.sf01
 
             font.pixelSize: 16
 
