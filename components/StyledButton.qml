@@ -6,14 +6,18 @@ MouseArea {
     id: root
     clip: true
     hoverEnabled: true
+    cursorShape: Qt.PointingHandCursor
 
+    property bool hovered: false
     property alias contentItem: contentLoader.sourceComponent
 
     property color disabledColor: Theme.color.bg00
     property color defaultColor: ColorUtils.transparentize(Theme.color.fg, 94 / 100)
-    property color hoveredColor: Theme.color.sf00
+    property color hoveredColor: ColorUtils.transparentize(Theme.color.fg, 0.8)
     property color pressedColor: Theme.color.primary
     property bool changeColors: true
+    onEntered: root.hovered = true
+    onExited: root.hovered = false
 
     function determineColor(): color {
         if (root.pressed) {
