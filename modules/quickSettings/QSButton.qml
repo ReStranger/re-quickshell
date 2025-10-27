@@ -1,6 +1,5 @@
 import QtQuick
 import QtQuick.Layouts
-import QtQuick.Controls
 import qs.utils
 import qs.components
 import qs.config
@@ -22,20 +21,48 @@ Item {
     property color hoveredColor: Theme.color.sf00
     property color pressedColor: Theme.color.primary
 
+    signal clicked()
+
     RowLayout {
         spacing: 0
 
-        Button {
+        MouseArea {
             id: menuButton
             implicitWidth: root.haveMenu ? 120 : root.implicitWidth
             implicitHeight: 40
             hoverEnabled: true
-            checkable: true
-            onToggled: {
-                root.toggled = !root.toggled;
+            cursorShape: Qt.PointingHandCursor
+
+            onClicked: {
+                root.clicked();
             }
 
-            contentItem: Item {
+            Rectangle {
+                anchors.fill: parent
+                topLeftRadius: Theme.rounding.windowRounding / 1.2
+                bottomLeftRadius: Theme.rounding.windowRounding / 1.2
+                topRightRadius: root.haveMenu ? 0 : Theme.rounding.windowRounding / 1.2
+                bottomRightRadius: root.haveMenu ? 0 : Theme.rounding.windowRounding / 1.2
+
+                color: root.toggled ? Theme.color.primary : Theme.color.sf00
+                Rectangle {
+                    anchors.fill: parent
+                    color: ColorUtils.transparentize(Theme.color.fg, 0.8)
+                    visible: menuButton.pressed
+                    topLeftRadius: Theme.rounding.windowRounding / 1.2
+                    bottomLeftRadius: Theme.rounding.windowRounding / 1.2
+                    topRightRadius: root.haveMenu ? 0 : Theme.rounding.windowRounding / 1.2
+                    bottomRightRadius: root.haveMenu ? 0 : Theme.rounding.windowRounding / 1.2
+                }
+
+                Behavior on color {
+                    ColorAnimation {
+                        duration: 100
+                        easing.type: Easing.Linear
+                    }
+                }
+            }
+            Item {
                 anchors.fill: parent
 
                 MaterialSymbol {
@@ -67,67 +94,21 @@ Item {
                     }
                 }
             }
-            background: Rectangle {
-                topLeftRadius: Theme.rounding.windowRounding / 1.2
-                bottomLeftRadius: Theme.rounding.windowRounding / 1.2
-                topRightRadius: root.haveMenu ? 0 : Theme.rounding.windowRounding / 1.2
-                bottomRightRadius: root.haveMenu ? 0 : Theme.rounding.windowRounding / 1.2
-
-                color: root.toggled ? Theme.color.primary : Theme.color.sf00
-                Rectangle {
-                    anchors.fill: parent
-                    color: ColorUtils.transparentize(Theme.color.fg, 0.8)
-                    visible: menuButton.pressed
-                    topLeftRadius: Theme.rounding.windowRounding / 1.2
-                    bottomLeftRadius: Theme.rounding.windowRounding / 1.2
-                    topRightRadius: root.haveMenu ? 0 : Theme.rounding.windowRounding / 1.2
-                    bottomRightRadius: root.haveMenu ? 0 : Theme.rounding.windowRounding / 1.2
-                }
-
-                Behavior on color {
-                    ColorAnimation {
-                        duration: 100
-                        easing.type: Easing.Linear
-                    }
-                }
-            }
         }
-        Button {
+        MouseArea {
             id: arrowButton
             visible: root.haveMenu
             implicitWidth: 30
             implicitHeight: 40
             hoverEnabled: true
-            checkable: true
+            cursorShape: Qt.PointingHandCursor
 
-            contentItem: Item {
-
-                anchors.centerIn: parent
-                implicitWidth: arrowIcon.font.pixelSize + 2
-                implicitHeight: arrowIcon.font.pixelSize + 2
-
-                MaterialSymbol {
-                    id: arrowIcon
-                    property real arrowAngle: 0
-                    anchors.centerIn: parent
-                    font.pixelSize: 25
-                    icon: "keyboard_arrow_right"
-                    color: root.toggled ? Theme.color.bg00 : Theme.color.fg
-                    rotation: root.isToggleOpen ? 90 : 0
-                    Behavior on rotation {
-                        NumberAnimation {
-                            duration: 200
-                            easing.type: Easing.OutCubic
-                        }
-                    }
-                }
-            }
-
-            onToggled: {
+            onClicked: {
                 root.isToggleOpen = !root.isToggleOpen;
             }
 
-            background: Rectangle {
+            Rectangle {
+                anchors.fill: parent
                 topLeftRadius: 0
                 bottomLeftRadius: 0
                 topRightRadius: Theme.rounding.windowRounding / 1.2
@@ -147,6 +128,28 @@ Item {
                     ColorAnimation {
                         duration: 100
                         easing.type: Easing.Linear
+                    }
+                }
+            }
+
+            Item {
+                anchors.centerIn: parent
+                implicitWidth: arrowIcon.font.pixelSize + 2
+                implicitHeight: arrowIcon.font.pixelSize + 2
+
+                MaterialSymbol {
+                    id: arrowIcon
+                    property real arrowAngle: 0
+                    anchors.centerIn: parent
+                    font.pixelSize: 25
+                    icon: "keyboard_arrow_right"
+                    color: root.toggled ? Theme.color.bg00 : Theme.color.fg
+                    rotation: root.isToggleOpen ? 90 : 0
+                    Behavior on rotation {
+                        NumberAnimation {
+                            duration: 200
+                            easing.type: Easing.OutCubic
+                        }
                     }
                 }
             }
