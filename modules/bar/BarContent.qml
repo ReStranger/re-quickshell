@@ -49,6 +49,7 @@ Item {
                 rightMargin: 7
                 verticalCenter: parent.verticalCenter
             }
+            SysTray {}
         }
     }
 }
