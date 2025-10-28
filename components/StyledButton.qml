@@ -9,6 +9,7 @@ MouseArea {
     cursorShape: Qt.PointingHandCursor
 
     property bool hovered: false
+    property bool toggled: false
     property alias contentItem: contentLoader.sourceComponent
 
     property color disabledColor: Theme.color.bg00
@@ -20,7 +21,7 @@ MouseArea {
     onExited: root.hovered = false
 
     function determineColor(): color {
-        if (root.pressed) {
+        if (root.pressed || root.toggled) {
             return root.pressedColor;
         }
         if (root.hovered) {
