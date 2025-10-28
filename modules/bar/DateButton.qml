@@ -10,8 +10,10 @@ import qs.config
 StyledButton {
     id: root
     acceptedButtons: Qt.LeftButton | Qt.RightButton
+    toggled: GlobalStates.dateMenuOpen
 
     property bool isDateVisible
+    property color textColor: root.enabled ? ((root.toggled || root.pressed) ? Theme.color.bg00 : Theme.color.fg) : Theme.color.sf01
 
     onClicked: function (mouse) {
         if (mouse.button === Qt.LeftButton) {
@@ -32,21 +34,21 @@ StyledButton {
         MaterialSymbol {
             id: clockIcon
             icon: "schedule"
-            color: root.enabled ? (root.pressed ? Theme.color.bg00 : Theme.color.fg) : Theme.color.sf01
+            color: root.textColor
             font.pixelSize: 20
         }
 
         StyledText {
             id: clockText
             text: DateTime.time
-            color: root.enabled ? (root.pressed ? Theme.color.bg00 : Theme.color.fg) : Theme.color.sf01
+            color: root.textColor
             font.pixelSize: 16
         }
         StyledText {
             id: dot
             visible: root.isDateVisible
             text: "•"
-            color: root.enabled ? (root.pressed ? Theme.color.bg00 : Theme.color.fg) : Theme.color.sf01
+            color: root.textColor
             font.pixelSize: 20
         }
         StyledText {
@@ -59,7 +61,7 @@ StyledButton {
             opacity: root.isDateVisible ? 1 : 0
 
             text: Utils.capitalize(DateTime.date.weekDayShort) + " " + DateTime.date.shortDate
-            color: root.enabled ? (root.pressed ? Theme.color.bg00 : Theme.color.fg) : Theme.color.sf01
+            color: root.textColor
 
             font.pixelSize: 16
 
