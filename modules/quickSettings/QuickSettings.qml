@@ -7,6 +7,7 @@ import Quickshell
 import Quickshell.Hyprland
 import qs.components
 import qs.services
+import qs.utils
 import qs.config
 
 Scope {
@@ -24,7 +25,7 @@ Scope {
         function hide() {
             GlobalStates.qsOpen = false;
         }
-        readonly property real topMargin: Theme.size.barHeight + Theme.size.hyprlandGapsOut
+        readonly property real barMargin: Theme.size.barHeight + Theme.size.hyprlandGapsOut
         readonly property real openedHeight: container.height + 4 * container.spacing
 
         implicitWidth: container.implicitWidth + container.spacing * 2 + Theme.size.hyprlandGapsOut
@@ -47,10 +48,12 @@ Scope {
             }
 
             anchors {
+                top: !Config.options.bar.bottom ? parent.top : undefined
                 left: parent.left
                 right: parent.right
-                top: parent.top
-                topMargin: qsRoot.topMargin
+                bottom: Config.options.bar.bottom ? parent.bottom : undefined
+                topMargin: qsRoot.barMargin
+                bottomMargin: qsRoot.barMargin
                 rightMargin: Theme.size.hyprlandGapsOut
             }
             height: GlobalStates.qsOpen ? container.height + 2 * container.spacing : 0
@@ -92,6 +95,8 @@ Scope {
                 RowLayout {
                     spacing: Theme.rounding.windowRounding / 2
                     Layout.alignment: Qt.AlignTop
+                    Layout.margins: Theme.rounding.windowRounding / 2
+                    Layout.bottomMargin: 0
 
                     Rectangle {
                         clip: true
