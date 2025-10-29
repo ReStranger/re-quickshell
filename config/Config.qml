@@ -77,7 +77,7 @@ Singleton {
 
             property JsonObject theme: JsonObject {
                 property bool darkmode: true
-                property int blur: 27
+                property bool blur: false
             }
             property JsonObject bar: JsonObject {
                 property bool bottom: false // Instead of top

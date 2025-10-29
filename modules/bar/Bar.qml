@@ -1,6 +1,7 @@
 pragma ComponentBehavior: Bound
 import QtQuick
 import Quickshell
+import Quickshell.Wayland
 import qs.config
 
 Scope {
@@ -23,6 +24,7 @@ Scope {
                 implicitHeight: Theme.size.barHeight + Theme.rounding.screenRounding
                 exclusionMode: ExclusionMode.Ignore
                 exclusiveZone: Theme.size.baseBarHeight + (Config.options.bar.cornerStyle === 1 ? Theme.size.hyprlandGapsOut : 0)
+                WlrLayershell.namespace: "quickshell:bar"
 
                 mask: Region {
                     item: barContent
@@ -65,7 +67,7 @@ Scope {
                         bottom: undefined
                     }
                     height: Theme.rounding.screenRounding
-                    active: Config.options.bar.showBackground && Config.options.bar.cornerStyle === 0 // Hug
+                    active: Config.options.bar.cornerStyle === 0 // Hug
                     states: State {
                         name: "bottom"
                         when: Config.options.bar.bottom
