@@ -20,7 +20,7 @@ Item {
     implicitHeight: rowLayout.implicitHeight + 12
 
     ShadowButton {
-        visible: !Config.options.bar.showBackground
+        visible: !Config.options.theme.showBackground
         anchors.fill: parent
         radius: Theme.rounding.windowRounding / 1.2
         fillColor: ColorUtils.transparentize(Theme.color.fg, 94 / 100)
