@@ -4,8 +4,9 @@ import qs.config
 Text {
     id: root
     property real fontSize
-    property string fontColor: Theme.color.fg
     property int fontWeight: Font.Normal
+    property string fontColor: Theme.color.fg
+    property string fontFamily: Theme.font.family.main
 
     color: fontColor
     renderType: Text.NativeRendering
@@ -13,7 +14,7 @@ Text {
 
     font {
         hintingPreference: Font.PreferFullHinting
-        family: Theme.font.family.main
+        family: fontFamily
         pixelSize: fontSize
         weight: fontWeight
     }
