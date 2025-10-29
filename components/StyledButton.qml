@@ -16,7 +16,9 @@ MouseArea {
     property color defaultColor: ColorUtils.transparentize(Theme.color.fg, 94 / 100)
     property color hoveredColor: ColorUtils.transparentize(Theme.color.fg, 0.8)
     property color pressedColor: Theme.color.primary
+    property real radius: Theme.rounding.windowRounding / 1.2
     property bool changeColors: true
+
     onEntered: root.hovered = true
     onExited: root.hovered = false
 
@@ -35,7 +37,7 @@ MouseArea {
 
     ShadowButton {
         anchors.fill: parent
-        radius: Theme.rounding.windowRounding / 1.2
+        radius: root.radius
         fillColor: root.enabled ? root.determineColor() : root.disabledColor
         borderColor: ColorUtils.transparentize("#eeeeee", 94 / 100)
         borderWidth: 1
