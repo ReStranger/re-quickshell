@@ -14,7 +14,7 @@ Item {
         }
 
         implicitSize: Theme.rounding.screenRounding
-        color: Config.options.bar.showBackground ? Theme.color.bg00 : ColorUtils.transparentize(Theme.color.bg00, 0.89)
+        color: Config.options.theme.showBackground ? Theme.color.bg00 : ColorUtils.transparentize(Theme.color.bg00, 0.89)
 
         corner: RoundCorner.CornerEnum.TopLeft
         states: State {
@@ -33,7 +33,7 @@ Item {
             bottom: Config.options.bar.bottom ? parent.bottom : undefined
         }
         implicitSize: Theme.rounding.screenRounding
-        color: Config.options.bar.showBackground ? Theme.color.bg00 : ColorUtils.transparentize(Theme.color.bg00, 0.89)
+        color: Config.options.theme.showBackground ? Theme.color.bg00 : ColorUtils.transparentize(Theme.color.bg00, 0.89)
 
         corner: RoundCorner.CornerEnum.TopRight
         states: State {

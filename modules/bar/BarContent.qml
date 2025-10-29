@@ -9,7 +9,7 @@ import qs.config
 Item {
     id: root
     Loader {
-        active: Config.options.bar.showBackground
+        active: Config.options.theme.showBackground && !Config.options.theme.blur
 
         anchors.fill: barBackground
         sourceComponent: RectangularDownShadow {
@@ -24,7 +24,7 @@ Item {
             margins: Config.options.bar.cornerStyle === 1 ? (Theme.size.hyprlandGapsOut / 2) : 0
             bottomMargin: Config.options.bar.cornerStyle === 1 ? (Theme.size.hyprlandGapsOut) : 0
         }
-        color: Config.options.bar.showBackground ? Theme.color.bg00 : ColorUtils.transparentize(Theme.color.bg00, 0.89)
+        color: Config.options.theme.showBackground ? Theme.color.bg00 : ColorUtils.transparentize(Theme.color.bg00, 0.89)
         radius: Config.options.bar.cornerStyle === 1 ? Theme.rounding.windowRounding : 0
         border.width: Config.options.bar.cornerStyle === 1 ? 1 : 0
         border.color: Theme.color.border00
