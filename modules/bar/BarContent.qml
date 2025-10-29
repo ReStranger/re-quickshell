@@ -3,6 +3,7 @@ pragma ComponentBehavior: Bound
 import QtQuick
 import QtQuick.Layouts
 import qs.components
+import qs.utils
 import qs.config
 
 Item {
@@ -18,13 +19,12 @@ Item {
     }
     Rectangle {
         id: barBackground
-        // opacity: 1 - (Config.options.theme.blur / 100)
         anchors {
             fill: parent
             margins: Config.options.bar.cornerStyle === 1 ? (Theme.size.hyprlandGapsOut / 2) : 0
             bottomMargin: Config.options.bar.cornerStyle === 1 ? (Theme.size.hyprlandGapsOut) : 0
         }
-        color: Config.options.bar.showBackground ? Theme.color.bg00 : "transparent"
+        color: Config.options.bar.showBackground ? Theme.color.bg00 : ColorUtils.transparentize(Theme.color.bg00, 0.89)
         radius: Config.options.bar.cornerStyle === 1 ? Theme.rounding.windowRounding : 0
         border.width: Config.options.bar.cornerStyle === 1 ? 1 : 0
         border.color: Theme.color.border00

@@ -1,5 +1,6 @@
 import QtQuick
 import qs.components
+import qs.utils
 import qs.config
 
 Item {
@@ -13,7 +14,7 @@ Item {
         }
 
         implicitSize: Theme.rounding.screenRounding
-        color: Config.options.bar.showBackground ? Theme.color.bg00 : "transparent"
+        color: Config.options.bar.showBackground ? Theme.color.bg00 : ColorUtils.transparentize(Theme.color.bg00, 0.89)
 
         corner: RoundCorner.CornerEnum.TopLeft
         states: State {
@@ -32,7 +33,7 @@ Item {
             bottom: Config.options.bar.bottom ? parent.bottom : undefined
         }
         implicitSize: Theme.rounding.screenRounding
-        color: Config.options.bar.showBackground ? Theme.color.bg00 : "transparent"
+        color: Config.options.bar.showBackground ? Theme.color.bg00 : ColorUtils.transparentize(Theme.color.bg00, 0.89)
 
         corner: RoundCorner.CornerEnum.TopRight
         states: State {
