@@ -59,7 +59,7 @@ Scope {
 
             Rectangle {
                 id: background
-                color: Theme.color.bg00
+                color: Config.options.theme.showBackground ? Theme.color.bg00 : ColorUtils.transparentize(Theme.color.bg00, 0.89)
                 width: shape.width
                 height: shape.height
                 radius: Theme.rounding.windowRounding
@@ -150,7 +150,7 @@ Scope {
                     }
                 }
                 Rectangle {
-                    color: Theme.color.bg01
+                    color: Config.options.theme.showBackground ? Theme.color.bg01 : ColorUtils.transparentize(Theme.color.fg, 0.89)
                     implicitWidth: qsButtonGrid.implicitWidth + 10
                     implicitHeight: qsButtonGrid.implicitHeight + 10
                     radius: Theme.rounding.windowRounding

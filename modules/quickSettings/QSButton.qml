@@ -44,7 +44,7 @@ Item {
                 topRightRadius: root.haveMenu ? 0 : Theme.rounding.windowRounding / 1.2
                 bottomRightRadius: root.haveMenu ? 0 : Theme.rounding.windowRounding / 1.2
 
-                color: root.toggled ? Theme.color.primary : Theme.color.sf00
+                color: root.toggled ? Theme.color.primary : (Config.options.theme.showBackground ? Theme.color.sf00 : ColorUtils.transparentize(Theme.color.fg, 0.89))
                 Rectangle {
                     anchors.fill: parent
                     color: ColorUtils.transparentize(Theme.color.fg, 0.8)
@@ -114,7 +114,7 @@ Item {
                 topRightRadius: Theme.rounding.windowRounding / 1.2
                 bottomRightRadius: Theme.rounding.windowRounding / 1.2
 
-                color: root.toggled ? Theme.color.primary : Theme.color.sf00
+                color: root.toggled ? Theme.color.primary : (Config.options.theme.showBackground ? Theme.color.sf00 : ColorUtils.transparentize(Theme.color.fg, 0.89))
                 Rectangle {
                     anchors.fill: parent
                     color: ColorUtils.transparentize(Theme.color.fg, 0.8)

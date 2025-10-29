@@ -9,7 +9,7 @@ import qs.config
 Item {
     id: root
     Loader {
-        active: Config.options.theme.showBackground && !Config.options.theme.blur
+        active: Config.options.theme.showBackground
 
         anchors.fill: barBackground
         sourceComponent: RectangularDownShadow {
