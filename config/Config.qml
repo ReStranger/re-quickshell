@@ -77,13 +77,15 @@ Singleton {
 
             property JsonObject theme: JsonObject {
                 property bool darkmode: true
+                property bool showBackground: true
+                // WARN: Set true only when showBackground = false
+                // WARN: Breack shadow render
                 property bool blur: false
             }
             property JsonObject bar: JsonObject {
                 property bool bottom: false // Instead of top
                 property int cornerStyle: 0 // 0: Hug | 1: Float | 2: Plain rectangle
                 property string launcherIcon: "rocket_launch" // Options: "distro" or any icon name in ~/.config/quickshell/ii/assets/icons
-                property bool showBackground: true
             }
             property JsonObject battery: JsonObject {
                 property int low: 20
