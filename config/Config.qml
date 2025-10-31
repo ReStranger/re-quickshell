@@ -81,6 +81,7 @@ Singleton {
                 // WARN: Set true only when showBackground = false
                 // WARN: Breack shadow render
                 property bool blur: false
+                property bool flatButton: false
             }
             property JsonObject bar: JsonObject {
                 property bool bottom: false // Instead of top
