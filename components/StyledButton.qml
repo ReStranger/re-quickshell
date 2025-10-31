@@ -35,16 +35,22 @@ MouseArea {
     implicitWidth: contentLoader.item ? contentLoader.item.implicitWidth + 10 : 0
     implicitHeight: contentLoader.item ? contentLoader.item.implicitHeight + 8 : 0
 
-    ShadowButton {
+    Loader {
+        id: backgroundLoader
+        active: !Config.options.theme.flatButton
         anchors.fill: parent
-        radius: root.radius
-        fillColor: root.enabled ? root.determineColor() : root.disabledColor
-        borderColor: ColorUtils.transparentize("#eeeeee", 94 / 100)
-        borderWidth: 1
-        Behavior on fillColor {
-            ColorAnimation {
-                duration: 100
-                easing.type: Easing.Linear
+        ShadowButton {
+            visible: !Config.options.theme.flatButton
+            anchors.fill: parent
+            radius: root.radius
+            fillColor: root.enabled ? root.determineColor() : root.disabledColor
+            borderColor: ColorUtils.transparentize("#eeeeee", 94 / 100)
+            borderWidth: 1
+            Behavior on fillColor {
+                ColorAnimation {
+                    duration: 100
+                    easing.type: Easing.Linear
+                }
             }
         }
     }
