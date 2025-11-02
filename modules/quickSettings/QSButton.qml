@@ -90,7 +90,6 @@ Item {
                         text: root.subName
                         fontSize: 10
                         fontColor: root.toggled ? Theme.color.bg00 : Theme.color.fg
-                        fontWeight: Font.Light
                     }
                 }
             }
