@@ -43,6 +43,7 @@ StyledButton {
             text: DateTime.time
             color: root.textColor
             font.pixelSize: 16
+            font.weight: Font.Bold
         }
         StyledText {
             id: dot
@@ -64,6 +65,7 @@ StyledButton {
             color: root.textColor
 
             font.pixelSize: 16
+            font.weight: Font.Bold
 
             Behavior on opacity {
                 NumberAnimation {
