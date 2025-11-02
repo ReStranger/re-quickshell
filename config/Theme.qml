@@ -35,7 +35,7 @@ Singleton {
     }
     font: QtObject {
         property QtObject family: QtObject {
-            property string main: "Rubik"
+            property string main: "Ubuntu Nerd Font"
             property string iconNerd: "SpaceMono NF"
             property string monospace: "JetBrains Mono NF"
         }
