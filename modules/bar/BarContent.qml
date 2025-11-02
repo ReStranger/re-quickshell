@@ -3,6 +3,7 @@ pragma ComponentBehavior: Bound
 import QtQuick
 import QtQuick.Layouts
 import qs.components
+import qs.modules.bar.systemStats
 import qs.utils
 import qs.config
 
@@ -49,6 +50,7 @@ Item {
                 rightMargin: 7
                 verticalCenter: parent.verticalCenter
             }
+            SystemStats {}
             SysTray {}
         }
     }
