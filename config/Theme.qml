@@ -21,6 +21,10 @@ Singleton {
         property color sf02: "#676778"
         property color fg: "#e9ecf2"
         property color primary: "#f17ac6"
+        property color green: "#55b682"
+        property color blue: "#7aaaff"
+        property color orange: "#ff9c6a"
+        property color red: "#f25c5c"
         // property color border00: root.transparentize("#eeeeee", 96 / 100)
         property color border00: ColorUtils.transparentize(sf01, 60 / 100)
         property color shadow: Qt.rgba(0, 0, 0, 0.4)
