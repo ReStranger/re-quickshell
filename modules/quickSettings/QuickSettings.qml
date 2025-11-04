@@ -126,8 +126,9 @@ Scope {
                     }
                     ColumnLayout {
                         StyledText {
-                            fontSize: 12
-                            text: DateTime.uptime
+                            fontSize: 16
+                            text: Config.options.system.user.name !== "" ? Config.options.system.user.name : System.username
+                            font.weight: Font.Bold
                         }
                         StyledText {
                             fontSize: 12
@@ -171,6 +172,9 @@ Scope {
                             margins: 5
                         }
                         columns: 2
+                        QSNetworkButton {}
+                        QSBluetoothButton {}
+                        QSPowerProfileButton {}
                     }
                 }
             }
