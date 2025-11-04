@@ -9,4 +9,5 @@ Singleton {
     property bool qsOpen: false
     property bool dateMenuOpen: false
     property bool screenLocked: false
+    property bool dndEnabled: false
 }

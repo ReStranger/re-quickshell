@@ -17,6 +17,8 @@ Singleton {
     property real memoryUsagePercent: 0
     property real memoryUsage: 0
 
+    property string currentGovernor: ""
+
     Process {
         id: usernameProcess
         command: ["sh", "-c", "echo $USER"]
@@ -67,6 +69,15 @@ Singleton {
         }
     }
 
+    Process {
+        id: currentGovernor
+        command: ["sh", "-c", "cat /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor"]
+        running: true
+        stdout: StdioCollector {
+            onStreamFinished: root.currentGovernor = this.text.trim()
+        }
+    }
+
     Timer {
         interval: 3000
         running: true
@@ -76,6 +87,7 @@ Singleton {
             cpuTemp.running = true;
             memoryUsageProcent.running = true;
             memoryUsage.running = true;
+            currentGovernor.running = true;
         }
     }
 }

@@ -11,7 +11,7 @@ import Quickshell
 import qs.modules.bar
 import qs.modules.quickSettings
 import qs.modules.dateMenu
-
+import qs.modules.notificationPopup
 
 ShellRoot {
     id: root
@@ -29,5 +29,9 @@ ShellRoot {
     LazyLoader {
         active: root.enableDateMenu
         component: DateMenu {}
+    }
+    LazyLoader {
+        active: true
+        component: NotificationPopup {}
     }
 }

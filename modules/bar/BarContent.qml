@@ -51,7 +51,9 @@ Item {
                 verticalCenter: parent.verticalCenter
             }
             SystemStats {}
+            BatteryIndicator {}
             SysTray {}
+            SystemIndicators {}
         }
     }
 }

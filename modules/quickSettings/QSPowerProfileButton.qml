@@ -1,13 +1,16 @@
 import qs.services
 import qs.config
+import qs.utils
 
 QSButton {
-    visible: Config.options.qs.buttonEnable.powerProfile ? PowerProfile.havePowerProfileDeamon : false
-    name: PowerProfile.statusText
-    subName: "TestName"
-    icon: PowerProfile.materialSymbol
-    haveMenu: true
+    visible: Config.options.qs.buttonEnable.powerProfile
+    name: PowerProfile.havePowerProfileDeamon ? PowerProfile.statusText : Utils.capitalize(System.currentGovernor)
+    icon: PowerProfile.havePowerProfileDeamon ? PowerProfile.materialSymbol : "speed"
+    haveMenu: PowerProfile.havePowerProfileDeamon
     toggled: PowerProfile.havePowerProfileDeamon
 
-    onClicked: PowerProfile.nextProfile()
+    onClicked: {
+        if (PowerProfile.havePowerProfileDeamon)
+            PowerProfile.nextProfile();
+    }
 }
