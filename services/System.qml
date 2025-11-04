@@ -5,15 +5,26 @@ import Quickshell
 import Quickshell.Io
 
 /**
- * System service that provides system statistics.
+ * System service that provides system info.
  */
 Singleton {
     id: root
+
+    property string username: ""
 
     property real cpuUsagePercent: 0
     property real cpuTemp: 0
     property real memoryUsagePercent: 0
     property real memoryUsage: 0
+
+    Process {
+        id: usernameProcess
+        command: ["sh", "-c", "echo $USER"]
+        running: true
+        stdout: StdioCollector {
+            onStreamFinished: root.username = this.text.trim()
+        }
+    }
 
     Process {
         id: cpuUsagePercent
