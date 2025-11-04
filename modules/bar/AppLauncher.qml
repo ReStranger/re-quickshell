@@ -6,4 +6,5 @@ StyledIconButton {
     id: root
     iconSize: 22
     iconName: Config.options.bar.launcherIcon
+    onClicked: GlobalStates.qsOpen = !GlobalStates.qsOpen
 }
