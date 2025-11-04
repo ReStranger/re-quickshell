@@ -74,6 +74,11 @@ Singleton {
 
         JsonAdapter {
             id: configOptionsJsonAdapter
+            property JsonObject system: JsonObject {
+                property JsonObject user: JsonObject {
+                    property string name: "";
+                }
+            }
 
             property JsonObject theme: JsonObject {
                 property bool darkmode: true
