@@ -4,6 +4,7 @@ pragma ComponentBehavior: Bound
 import QtQuick
 import Quickshell
 import Quickshell.Io
+import qs.utils
 
 /**
  * A nice wrapper for date and time strings.
@@ -39,20 +40,7 @@ Singleton {
             const textUptime = fileUptime.text();
             const uptimeSeconds = Number(textUptime.split(" ")[0] ?? 0);
 
-            // Convert seconds to days, hours, and minutes
-            const days = Math.floor(uptimeSeconds / 86400);
-            const hours = Math.floor((uptimeSeconds % 86400) / 3600);
-            const minutes = Math.floor((uptimeSeconds % 3600) / 60);
-
-            // Build the formatted uptime string
-            let formatted = "";
-            if (days > 0)
-                formatted += `${days}d`;
-            if (hours > 0)
-                formatted += `${formatted ? ", " : ""}${hours}h`;
-            if (minutes > 0 || !formatted)
-                formatted += `${formatted ? ", " : ""}${minutes}m`;
-            root.uptime = formatted;
+            root.uptime = Utils.formatSeconds(uptimeSeconds);
             interval = 3000;
         }
     }
