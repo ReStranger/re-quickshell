@@ -1,0 +1,61 @@
+import QtQuick
+import Quickshell
+import Quickshell.Wayland
+import qs.components
+import qs.services
+import qs.config
+
+Scope {
+    id: root
+    PanelWindow {
+        id: popupRoot
+        color: "transparent"
+        exclusionMode: ExclusionMode.Ignore
+        WlrLayershell.layer: WlrLayer.Overlay
+        anchors {
+            top: !Config.options.bar.bottom
+            right: true
+            bottom: Config.options.bar.bottom
+        }
+
+        readonly property real barMargin: Theme.size.barHeight + Theme.size.hyprlandGapsOut
+
+        implicitWidth: container.implicitWidth + Theme.size.hyprlandGapsOut
+        implicitHeight: container.implicitHeight + barMargin
+
+        visible: !GlobalStates.dndEnabled && NotificationDaemon.popups.length > 0
+
+        mask: Region {
+            item: container
+        }
+        Column {
+            id: container
+            anchors.topMargin: popupRoot.barMargin
+            anchors.fill: parent
+            spacing: 5
+            Repeater {
+                id: rep
+                anchors.fill: parent
+                model: NotificationDaemon.popups
+
+                delegate: NotificationItem {
+                    id: child
+
+                    title: modelData.summary || ""
+                    body: modelData.body || ""
+                    image: modelData.image || modelData.appIcon
+                    rawNotification: modelData
+                    tracked: modelData.shown || !(modelData.shown = true)
+                    popup: true
+                    buttons: modelData.actions.map(action => ({
+                                label: action.text,
+                                onClick: () => {
+                                    action.invoke();
+                                }
+                            }))
+                    onExited: modelData.dismiss()
+                }
+            }
+        }
+    }
+}
