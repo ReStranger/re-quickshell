@@ -175,6 +175,7 @@ Scope {
                         QSNetworkButton {}
                         QSBluetoothButton {}
                         QSPowerProfileButton {}
+                        QSDnd {}
                     }
                 }
             }
