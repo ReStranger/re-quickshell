@@ -52,6 +52,7 @@ Item {
             }
             SystemStats {}
             SysTray {}
+            SystemIndicators {}
         }
     }
 }
