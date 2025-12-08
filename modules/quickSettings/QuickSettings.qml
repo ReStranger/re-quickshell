@@ -1,4 +1,5 @@
 import QtQuick
+import QtQuick.Controls
 import QtQuick.Shapes
 import QtQuick.Layouts
 import Qt5Compat.GraphicalEffects
@@ -177,6 +178,36 @@ Scope {
                         QSPowerProfileButton {}
                         QSDnd {}
                     }
+                }
+                Rectangle {
+                    color: Config.options.theme.showBackground ? Theme.color.bg01 : ColorUtils.transparentize(Theme.color.fg, 0.89)
+                    implicitWidth: qsSliderColumn.implicitWidth + 10
+                    implicitHeight: qsSliderColumn.implicitHeight + 10
+                    radius: Theme.rounding.windowRounding
+                    Layout.fillWidth: true
+                    ColumnLayout {
+                        id: qsSliderColumn
+                        anchors {
+                            fill: parent
+                            margins: 5
+                        }
+                        Layout.fillWidth: true
+                        RowLayout {
+                            spacing: 0
+                            MaterialSymbol {
+                                icon: Audio.sink.materialSymbol
+                                iconSize: 22
+                                color: Theme.color.fg
+                                Layout.alignment: Qt.AlignVCenter
+                            }
+                            StyledSlider {
+                                value: Audio.sink.volume
+                                from: 0
+                                to: 1
+                                stepSize: 0.05
+                                onMoved: Audio.sink.setVolume(value)
+                            }
+                        }
                 }
             }
         }
