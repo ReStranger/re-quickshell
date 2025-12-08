@@ -6,6 +6,8 @@ import QtQuick.Effects
 import Quickshell
 import Quickshell.Io
 import Quickshell.Hyprland
+import qs.components
+import qs.services
 import qs.config
 
 Scope {
@@ -31,6 +33,7 @@ Scope {
         }
         Shape {
             id: shape
+            clip: true
             focus: true
 
             Keys.onPressed: event => {
@@ -91,22 +94,6 @@ Scope {
                 }
 
                 ColumnLayout {
-
-                    Button {
-                        text: "left"
-                    }
-                    Button {
-                        text: "left"
-                    }
-                    Button {
-                        text: "left"
-                    }
-                    Button {
-                        text: "left"
-                    }
-                }
-
-                ColumnLayout {
                     id: grid
                     Layout.alignment: Qt.AlignTop
                     Layout.preferredHeight: parent.height
@@ -118,8 +105,75 @@ Scope {
                         columnSpacing: rowSpacing
                         Layout.alignment: Qt.AlignTop
 
-                        Button {}
-                        Button {}
+                        Rectangle {
+                            implicitWidth: 300 + 10
+                            implicitHeight: dateMenuRoot.openedHeight - 80
+                            color: Theme.color.sf00
+                            radius: 10
+                            ScrollView {
+                                clip: true
+                                anchors {
+                                    fill: parent
+                                    leftMargin: 5
+                                }
+                                Column {
+                                    spacing: 5
+                                    Repeater {
+                                        id: rep
+
+                                        model: Array.from(NotificationDaemon.data).reverse()
+
+                                        delegate: NotificationItem {
+                                            id: child
+
+                                            title: modelData?.summary
+                                            body: modelData?.body
+                                            image: modelData?.image || modelData?.appIcon
+                                            rawNotification: modelData
+                                            tracked: true
+                                            buttons: modelData.actions.map(action => ({
+                                                        label: action.text,
+                                                        onClick: () => {
+                                                            action.invoke();
+                                                        }
+                                                    }))
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                ColumnLayout {
+                    StyledButton {
+                        implicitWidth: 80
+                        implicitHeight: 80
+                        contentItem: StyledText {
+                            text: "left"
+                        }
+                        onClicked: Quickshell.execDetached(["sh", "-c", "notify-send \"Заголовок\" \"Основной текст\""])
+                    }
+                    StyledButton {
+                        implicitWidth: 80
+                        implicitHeight: 80
+                        contentItem: StyledText {
+                            text: "left"
+                        }
+                        onClicked: Quickshell.execDetached(["sh", "-c", "notify-send \"Заголовок\" \"Основной текст\" --action=\"key1=Кнопка 1\" --action=\"key2=Кнопка 2\""])
+                    }
+                    StyledButton {
+                        implicitWidth: 80
+                        implicitHeight: 80
+                        contentItem: StyledText {
+                            text: "left"
+                        }
+                    }
+                    StyledButton {
+                        implicitWidth: 80
+                        implicitHeight: 80
+                        contentItem: StyledText {
+                            text: "left"
+                        }
                     }
                 }
             }
