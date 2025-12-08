@@ -2,8 +2,7 @@ import qs.config
 
 QSButton {
     visible: Config.options.qs.buttonEnable.dnd
-    name: "DND"
-    subName: "TestName"
+    name: GlobalStates.dndEnabled ? "Silent" : "DND"
     icon: GlobalStates.dndEnabled ? "notifications_off" : "notifications"
     toggled: GlobalStates.dndEnabled
 
