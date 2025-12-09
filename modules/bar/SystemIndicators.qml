@@ -68,6 +68,7 @@ StyledButton {
         }
         MaterialSymbol {
             id: bluetoothIcon
+            visible: Bluetooth.available
             icon: Bluetooth.materialSymbol
             color: root.textColor
             font.pixelSize: 18
