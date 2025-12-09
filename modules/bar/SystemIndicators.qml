@@ -54,6 +54,19 @@ StyledButton {
             font.pixelSize: 18
         }
         MaterialSymbol {
+            id: sourceMuteIcon
+            visible: Audio.source.volume === 0
+            icon: Audio.source.materialSymbol
+            color: root.textColor
+            font.pixelSize: 18
+        }
+        MaterialSymbol {
+            id: sinkMuteIcon
+            icon: Audio.sink.materialSymbol
+            color: root.textColor
+            font.pixelSize: 18
+        }
+        MaterialSymbol {
             id: bluetoothIcon
             icon: Bluetooth.materialSymbol
             color: root.textColor
