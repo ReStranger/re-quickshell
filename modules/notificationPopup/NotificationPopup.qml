@@ -45,15 +45,34 @@ Scope {
                     body: modelData.body || ""
                     image: modelData.image || modelData.appIcon
                     rawNotification: modelData
-                    tracked: modelData.shown || !(modelData.shown = true)
-                    popup: true
+                    // tracked: modelData.shown || !(modelData.shown = true)
                     buttons: modelData.actions.map(action => ({
                                 label: action.text,
                                 onClick: () => {
                                     action.invoke();
                                 }
                             }))
-                    onExited: modelData.dismiss()
+                    onExited: exitAnim.start()
+                    x: modelData.shown ? 0 : 100
+
+                    Component.onCompleted: {
+                        if (!modelData.shown) {
+                            entryAnim.start();
+                            modelData.shown = true;
+                        }
+                    }
+
+                    ParallelAnimation {
+                        id: entryAnim
+
+                        NumberAnimation {
+                            target: child
+                            property: "x"
+                            to: 0
+                            duration: 400
+                            easing.type: Easing.OutBack
+                        }
+                    }
                 }
             }
         }
