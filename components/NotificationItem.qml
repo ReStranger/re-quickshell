@@ -11,7 +11,6 @@ Rectangle {
     property string body: "No content"
     property var rawNotification: null
     property bool tracked: false
-    property bool popup: false
     property string image: ""
     property bool hovered: false
     property bool showButtons: root.hovered && root.buttons.length > 1
@@ -182,9 +181,6 @@ Rectangle {
         cursorShape: Qt.PointingHandCursor
         onEntered: root.hovered = true
         onExited: {
-            if (root.popup) {
-                root.dismiss();
-            }
             root.hovered = false;
         }
     }
