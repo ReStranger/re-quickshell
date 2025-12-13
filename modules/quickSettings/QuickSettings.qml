@@ -128,7 +128,7 @@ Scope {
                     ColumnLayout {
                         StyledText {
                             fontSize: 16
-                            text: Config.options.system.user.name !== "" ? Config.options.system.user.name : System.username
+                            text: Config.options.system.user.name !== "" ? Config.options.system.user.name : SystemInfo.username
                             font.weight: Font.Bold
                         }
                         StyledText {

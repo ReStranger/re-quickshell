@@ -7,16 +7,16 @@ RowLayout {
 
     CircularStatus {
         icon: "memory"
-        progress: System.cpuUsagePercent
+        progress: SystemInfo.cpuUsagePercent
     }
     CircularStatus {
         icon: "device_thermostat"
-        progress: Math.max(0, Math.min(100, ((System.cpuTemp - 10) / (110 - 10)) * 100))
-        text: System.cpuTemp + "°C"
+        progress: Math.max(0, Math.min(100, ((SystemInfo.cpuTemp - 10) / (110 - 10)) * 100))
+        text: SystemInfo.cpuTemp + "°C"
     }
     CircularStatus {
         icon: "memory_alt"
-        progress: System.memoryUsagePercent
-        text: System.memoryUsage + " Gb"
+        progress: SystemInfo.memoryUsagePercent
+        text: SystemInfo.memoryUsage + " Gb"
     }
 }
