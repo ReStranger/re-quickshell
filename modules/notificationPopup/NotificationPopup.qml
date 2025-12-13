@@ -30,8 +30,11 @@ Scope {
         }
         Column {
             id: container
-            anchors.topMargin: popupRoot.barMargin
-            anchors.fill: parent
+            anchors {
+                fill: parent
+                topMargin: !Config.options.bar.bottom ? popupRoot.barMargin : 0
+                bottomMargin: Config.options.bar.bottom ? popupRoot.barMargin : 0
+            }
             spacing: 5
             Repeater {
                 id: rep
