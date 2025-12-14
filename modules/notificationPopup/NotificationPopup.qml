@@ -13,15 +13,15 @@ Scope {
         exclusionMode: ExclusionMode.Ignore
         WlrLayershell.layer: WlrLayer.Overlay
         anchors {
-            top: !Config.options.bar.bottom
+            top: true
             right: true
-            bottom: Config.options.bar.bottom
+            bottom: true
         }
 
         readonly property real barMargin: Theme.size.barHeight + Theme.size.hyprlandGapsOut
 
         implicitWidth: container.implicitWidth + Theme.size.hyprlandGapsOut + 20
-        implicitHeight: container.implicitHeight + barMargin
+        // implicitHeight: container.implicitHeight + barMargin
 
         visible: !GlobalStates.dndEnabled && NotificationDaemon.popups.length > 0
 
@@ -31,9 +31,11 @@ Scope {
         Column {
             id: container
             anchors {
-                fill: parent
-                leftMargin: 20
+                top: !Config.options.bar.bottom ? parent.top : undefined
+                left: parent.left
+                bottom: Config.options.bar.bottom ? parent.bottom : undefined
                 topMargin: !Config.options.bar.bottom ? popupRoot.barMargin : 0
+                leftMargin: 20 // reserved for animation
                 bottomMargin: Config.options.bar.bottom ? popupRoot.barMargin : 0
             }
             spacing: 5
