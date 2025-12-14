@@ -20,7 +20,7 @@ Scope {
 
         readonly property real barMargin: Theme.size.barHeight + Theme.size.hyprlandGapsOut
 
-        implicitWidth: container.implicitWidth + Theme.size.hyprlandGapsOut
+        implicitWidth: container.implicitWidth + Theme.size.hyprlandGapsOut + 20
         implicitHeight: container.implicitHeight + barMargin
 
         visible: !GlobalStates.dndEnabled && NotificationDaemon.popups.length > 0
@@ -32,6 +32,7 @@ Scope {
             id: container
             anchors {
                 fill: parent
+                leftMargin: 20
                 topMargin: !Config.options.bar.bottom ? popupRoot.barMargin : 0
                 bottomMargin: Config.options.bar.bottom ? popupRoot.barMargin : 0
             }
