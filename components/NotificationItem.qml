@@ -41,19 +41,6 @@ Rectangle {
         }
     }
 
-    MouseArea {
-        anchors.fill: parent
-        acceptedButtons: Qt.LeftButton
-        cursorShape: Qt.PointingHandCursor
-
-        onClicked: {
-            if (root.showButtons) {
-                root.buttons[0].onClick();
-            }
-            root.dismiss();
-        }
-    }
-
     ColumnLayout {
         id: content
         anchors.fill: parent
