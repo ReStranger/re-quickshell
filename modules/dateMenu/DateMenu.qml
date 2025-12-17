@@ -1,8 +1,6 @@
 import QtQuick
-import QtQuick.Shapes
 import QtQuick.Controls
 import QtQuick.Layouts
-import QtQuick.Effects
 import Quickshell
 import Quickshell.Io
 import Quickshell.Hyprland
@@ -11,36 +9,31 @@ import qs.services
 import qs.config
 
 Scope {
-    id: root
     PanelWindow {
-        id: dateMenuRoot
-        anchors.top: true
-        exclusionMode: ExclusionMode.Ignore
+        id: root
         color: "transparent"
+        exclusionMode: ExclusionMode.Ignore
+        anchors.top: true
 
         function hide() {
             GlobalStates.dateMenuOpen = false;
         }
+
         readonly property real openedHeight: container.height + 2 * container.spacing + Theme.size.barHeight + Theme.size.hyprlandGapsOut
 
         implicitWidth: container.implicitWidth + container.spacing * 2
-        implicitHeight: shape.height > 0 ? openedHeight + 10 : 0
+        implicitHeight: background.height > 0 ? openedHeight + 10 : 0
 
-        visible: shape.height > 0
+        visible: background.height > 0
 
         mask: Region {
             item: shape
         }
-        Shape {
-            id: shape
-            clip: true
-            focus: true
 
-            Keys.onPressed: event => {
-                if (event.key === Qt.Key_Escape) {
-                    dateMenuRoot.hide();
-                }
-            }
+        Rectangle {
+            id: background
+            focus: true
+            clip: true
 
             anchors {
                 left: parent.left
@@ -50,35 +43,27 @@ Scope {
             }
 
             height: GlobalStates.dateMenuOpen ? container.height + 2 * container.spacing : 0
+            color: Theme.color.bg00
+            radius: Theme.rounding.windowRounding
+
             onHeightChanged: if (height <= 0)
-                dateMenuRoot.hide()
+                root.hide()
+
+            border {
+                width: 1
+                color: Theme.color.border00
+            }
+
+            Keys.onPressed: event => {
+                if (event.key === Qt.Key_Escape) {
+                    root.hide();
+                }
+            }
 
             Behavior on height {
                 NumberAnimation {
                     duration: 200
                     easing.type: Easing.OutCubic
-                }
-            }
-
-            layer.enabled: true
-            layer.samples: 4
-            layer.effect: MultiEffect {
-                shadowEnabled: true
-                shadowColor: Theme.color.shadow
-                blurMax: 2
-                autoPaddingEnabled: false
-                paddingRect: Qt.rect(0, 0, parent.width, parent.height)
-            }
-
-            Rectangle {
-                id: background
-                width: shape.width
-                height: shape.height
-                radius: Theme.rounding.windowRounding
-                color: Theme.color.bg00
-                border {
-                    width: 1
-                    color: Theme.color.border00
                 }
             }
 
@@ -107,7 +92,7 @@ Scope {
 
                         Rectangle {
                             implicitWidth: 300 + 10
-                            implicitHeight: dateMenuRoot.openedHeight - 80
+                            implicitHeight: root.openedHeight - 80
                             color: Theme.color.sf00
                             radius: 10
                             ScrollView {
@@ -178,13 +163,14 @@ Scope {
                 }
             }
         }
+
         HyprlandFocusGrab {
             id: grab
-            windows: [dateMenuRoot]
+            windows: [root]
             active: GlobalStates.dateMenuOpen
             onCleared: () => {
                 if (!active)
-                    dateMenuRoot.hide();
+                    root.hide();
             }
         }
     }
@@ -192,15 +178,15 @@ Scope {
         target: "DateMenu"
 
         function toggle(): void {
-            GlobalStates.qsOpen = !GlobalStates.qsOpen;
+            GlobalStates.dateMenuOpen = !GlobalStates.dateMenuOpen;
         }
 
         function close(): void {
-            GlobalStates.qsOpen = false;
+            GlobalStates.dateMenuOpen = false;
         }
 
         function open(): void {
-            GlobalStates.qsOpen = true;
+            GlobalStates.dateMenuOpen = true;
         }
     }
 }

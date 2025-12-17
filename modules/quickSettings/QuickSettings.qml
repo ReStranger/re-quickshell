@@ -1,6 +1,4 @@
 import QtQuick
-import QtQuick.Controls
-import QtQuick.Shapes
 import QtQuick.Layouts
 import Qt5Compat.GraphicalEffects
 import Quickshell.Io
@@ -12,9 +10,8 @@ import qs.utils
 import qs.config
 
 Scope {
-    id: root
     PanelWindow {
-        id: qsRoot
+        id: root
         color: "transparent"
         exclusionMode: ExclusionMode.Ignore
         anchors {
@@ -30,57 +27,53 @@ Scope {
         readonly property real openedHeight: container.height + 4 * container.spacing
 
         implicitWidth: container.implicitWidth + container.spacing * 2 + Theme.size.hyprlandGapsOut
-        implicitHeight: shape.height > 0 ? openedHeight : 0
+        implicitHeight: background.height > 0 ? openedHeight : 0
 
-        visible: shape.height > 0
+        visible: background.height > 0
 
         mask: Region {
-            item: shape
+            item: background
         }
 
-        Shape {
-            id: shape
+        Rectangle {
+            id: background
             focus: true
-
-            Keys.onPressed: event => {
-                if (event.key === Qt.Key_Escape) {
-                    qsRoot.hide();
-                }
-            }
+            clip: true
 
             anchors {
                 top: !Config.options.bar.bottom ? parent.top : undefined
                 left: parent.left
                 right: parent.right
                 bottom: Config.options.bar.bottom ? parent.bottom : undefined
-                topMargin: qsRoot.barMargin
-                bottomMargin: qsRoot.barMargin
+                topMargin: root.barMargin
+                bottomMargin: root.barMargin
                 rightMargin: Theme.size.hyprlandGapsOut
             }
-            height: GlobalStates.qsOpen ? container.height + 2 * container.spacing : 0
-            onHeightChanged: if (height <= 0)
-                qsRoot.hide()
 
-            Rectangle {
-                id: background
-                color: Config.options.theme.showBackground ? Theme.color.bg00 : ColorUtils.transparentize(Theme.color.bg00, 0.89)
-                width: shape.width
-                height: shape.height
-                radius: Theme.rounding.windowRounding
-                border {
-                    width: 1
-                    color: Theme.color.border00
+            height: GlobalStates.qsOpen ? container.height + 2 * container.spacing : 0
+            color: Config.options.theme.showBackground ? Theme.color.bg00 : ColorUtils.transparentize(Theme.color.bg00, 0.89)
+            radius: Theme.rounding.windowRounding
+
+            onHeightChanged: if (height <= 0)
+                root.hide()
+
+            border {
+                width: 1
+                color: Theme.color.border00
+            }
+
+            Keys.onPressed: event => {
+                if (event.key === Qt.Key_Escape) {
+                    root.hide();
                 }
             }
+
             Behavior on height {
                 NumberAnimation {
                     duration: 200
                     easing.type: Easing.OutCubic
                 }
             }
-
-            layer.enabled: true
-            layer.samples: 4
 
             ColumnLayout {
                 id: container
@@ -208,17 +201,18 @@ Scope {
                                 onMoved: Audio.sink.setVolume(value)
                             }
                         }
+                    }
                 }
             }
         }
 
         HyprlandFocusGrab {
             id: grab
-            windows: [qsRoot]
+            windows: [root]
             active: GlobalStates.qsOpen
             onCleared: () => {
                 if (!active)
-                    qsRoot.hide();
+                    root.hide();
             }
         }
     }
