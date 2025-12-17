@@ -17,14 +17,8 @@ Singleton {
     case PowerProfile.Performance:
         return "local_fire_department";
     }
-    property string statusText: switch (PowerProfiles.profile) {
-    case PowerProfile.PowerSaver:
-        return "Power Saver";
-    case PowerProfile.Balanced:
-        return "Balanced";
-    case PowerProfile.Performance:
-        return "Performance";
-    }
+    property string statusText: PowerProfile.toString(PowerProfiles.profile)
+
     function nextProfile(event) {
         if (havePowerProfileDeamon) {
             switch (PowerProfiles.profile) {
