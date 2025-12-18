@@ -1,4 +1,5 @@
 import QtQuick
+import QtQuick.Controls
 import QtQuick.Layouts
 import Qt5Compat.GraphicalEffects
 import Quickshell.Io
@@ -164,6 +165,12 @@ Scope {
                         QSPowerProfileButton {}
                         QSDnd {}
                     }
+                    ScrollView {
+                        Column {
+
+                        }
+
+                    }
                 }
                 Rectangle {
                     color: Config.options.theme.showBackground ? Theme.color.bg01 : ColorUtils.transparentize(Theme.color.fg, 0.89)
@@ -192,6 +199,30 @@ Scope {
                                 to: 1
                                 stepSize: 0.05
                                 onMoved: Audio.sink.setVolume(value)
+                            }
+                        }
+                        RowLayout {
+                            visible: Brightness.initialized
+                            y: Brightness.initialized ? -width : 0
+                            spacing: 0
+                            MaterialSymbol {
+                                icon: Brightness.materialSymbol
+                                iconSize: 22
+                                color: Theme.color.fg
+                                Layout.alignment: Qt.AlignVCenter
+                            }
+                            StyledSlider {
+                                value: Brightness.value
+                                from: 0
+                                to: 1
+                                stepSize: 0.05
+                                onMoved: Brightness.set(value)
+                            }
+                        }
+                        Behavior on width {
+                            NumberAnimation {
+                                duration: 250
+                                easing.type: Easing.OutCubic
                             }
                         }
                     }
