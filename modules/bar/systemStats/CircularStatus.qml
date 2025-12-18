@@ -8,7 +8,7 @@ RowLayout {
     property real progress: 0
     property string text
     property string icon
-    readonly property string foregroundColor: root.progress < 20 ? Theme.color.blue : Theme.cpuUsagePercent < 40 ? Theme.color.green : root.progress < 70 ? Theme.color.fg : root.progress < 85 ? Theme.color.orange : Theme.color.red
+    readonly property string foregroundColor: root.progress < 70 ? Theme.color.fg : root.progress < 85 ? Theme.color.orange : Theme.color.red
 
     Layout.leftMargin: 5
 

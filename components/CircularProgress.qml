@@ -7,7 +7,7 @@ Item {
     property real progress: 0
     property string icon: ""
     property real iconSize: 18
-    property color foregroundColor: Theme.color.primary
+    property color foregroundColor: Theme.color.fg
     property color backgroundColor: Theme.color.sf01
     property bool useAnim: true
     property bool showProcentage: false
