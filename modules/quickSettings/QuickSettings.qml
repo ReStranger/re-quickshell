@@ -23,13 +23,11 @@ Scope {
         function hide() {
             GlobalStates.qsOpen = false;
         }
-        readonly property real barMargin: Theme.size.barHeight + Theme.size.hyprlandGapsOut
-        readonly property real openedHeight: container.height + 4 * container.spacing
+        readonly property real windowWidth: container.implicitWidth + container.spacing * 2 + Theme.size.hyprlandGapsOut
+        readonly property real windowHeight: container.height + 4 * container.spacing + Theme.size.hyprlandGapsOut * 2
 
-        implicitWidth: container.implicitWidth + container.spacing * 2 + Theme.size.hyprlandGapsOut
-        implicitHeight: background.height > 0 ? openedHeight : 0
-
-        visible: background.height > 0
+        implicitWidth: windowWidth
+        implicitHeight: windowHeight + Theme.size.barHeight
 
         mask: Region {
             item: background
@@ -39,23 +37,25 @@ Scope {
             id: background
             focus: true
             clip: true
+            readonly property real targetY: GlobalStates.qsOpen ? Theme.size.barHeight + Theme.size.hyprlandGapsOut : -root.windowHeight
+            y: targetY
 
             anchors {
-                top: !Config.options.bar.bottom ? parent.top : undefined
                 left: parent.left
                 right: parent.right
-                bottom: Config.options.bar.bottom ? parent.bottom : undefined
-                topMargin: root.barMargin
-                bottomMargin: root.barMargin
                 rightMargin: Theme.size.hyprlandGapsOut
             }
 
-            height: GlobalStates.qsOpen ? container.height + 2 * container.spacing : 0
+            Behavior on y {
+                NumberAnimation {
+                    duration: 200
+                    easing.type: Easing.OutCubic
+                }
+            }
+
+            height: container.height + 2 * container.spacing
             color: Config.options.theme.showBackground ? Theme.color.bg00 : ColorUtils.transparentize(Theme.color.bg00, 0.89)
             radius: Theme.rounding.windowRounding
-
-            onHeightChanged: if (height <= 0)
-                root.hide()
 
             border {
                 width: 1
@@ -65,13 +65,6 @@ Scope {
             Keys.onPressed: event => {
                 if (event.key === Qt.Key_Escape) {
                     root.hide();
-                }
-            }
-
-            Behavior on height {
-                NumberAnimation {
-                    duration: 200
-                    easing.type: Easing.OutCubic
                 }
             }
 
@@ -214,22 +207,6 @@ Scope {
                 if (!active)
                     root.hide();
             }
-        }
-    }
-
-    IpcHandler {
-        target: "QuickSettings"
-
-        function toggle(): void {
-            GlobalStates.qsOpen = !GlobalStates.qsOpen;
-        }
-
-        function close(): void {
-            GlobalStates.qsOpen = false;
-        }
-
-        function open(): void {
-            GlobalStates.qsOpen = true;
         }
     }
 }

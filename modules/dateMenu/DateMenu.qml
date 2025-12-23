@@ -2,7 +2,6 @@ import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
 import Quickshell
-import Quickshell.Io
 import Quickshell.Hyprland
 import qs.components
 import qs.services
@@ -19,35 +18,38 @@ Scope {
             GlobalStates.dateMenuOpen = false;
         }
 
-        readonly property real openedHeight: container.height + 2 * container.spacing + Theme.size.barHeight + Theme.size.hyprlandGapsOut
+        readonly property real windowWidth: container.implicitWidth + container.spacing * 2
+        readonly property real windowHeight: container.height + 2 * container.spacing + Theme.size.hyprlandGapsOut * 2
 
-        implicitWidth: container.implicitWidth + container.spacing * 2
-        implicitHeight: background.height > 0 ? openedHeight + 10 : 0
-
-        visible: background.height > 0
+        implicitWidth: windowWidth
+        implicitHeight: windowHeight + Theme.size.barHeight
 
         mask: Region {
-            item: shape
+            item: background
         }
 
         Rectangle {
             id: background
             focus: true
             clip: true
+            readonly property real targetY: GlobalStates.dateMenuOpen ? Theme.size.barHeight + Theme.size.hyprlandGapsOut : -root.windowHeight
+            y: targetY
 
             anchors {
                 left: parent.left
                 right: parent.right
-                top: parent.top
-                topMargin: Theme.size.barHeight + Theme.size.hyprlandGapsOut
             }
 
-            height: GlobalStates.dateMenuOpen ? container.height + 2 * container.spacing : 0
+            Behavior on y {
+                NumberAnimation {
+                    duration: 200
+                    easing.type: Easing.OutCubic
+                }
+            }
+
+            height: container.height + 2 * container.spacing
             color: Theme.color.bg00
             radius: Theme.rounding.windowRounding
-
-            onHeightChanged: if (height <= 0)
-                root.hide()
 
             border {
                 width: 1
@@ -57,13 +59,6 @@ Scope {
             Keys.onPressed: event => {
                 if (event.key === Qt.Key_Escape) {
                     root.hide();
-                }
-            }
-
-            Behavior on height {
-                NumberAnimation {
-                    duration: 200
-                    easing.type: Easing.OutCubic
                 }
             }
 
@@ -92,7 +87,7 @@ Scope {
 
                         Rectangle {
                             implicitWidth: 300 + 10
-                            implicitHeight: root.openedHeight - 80
+                            implicitHeight: container.height + 2 * container.spacing - 30
                             color: Theme.color.sf00
                             radius: 10
                             ScrollView {
@@ -172,21 +167,6 @@ Scope {
                 if (!active)
                     root.hide();
             }
-        }
-    }
-    IpcHandler {
-        target: "DateMenu"
-
-        function toggle(): void {
-            GlobalStates.dateMenuOpen = !GlobalStates.dateMenuOpen;
-        }
-
-        function close(): void {
-            GlobalStates.dateMenuOpen = false;
-        }
-
-        function open(): void {
-            GlobalStates.dateMenuOpen = true;
         }
     }
 }
