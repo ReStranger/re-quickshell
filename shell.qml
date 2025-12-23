@@ -19,16 +19,16 @@ ShellRoot {
     property bool enableQS: true
     property bool enableDateMenu: true
     LazyLoader {
-        active: root.enableBar
-        component: Bar {}
-    }
-    LazyLoader {
         active: root.enableQS
         component: QuickSettings {}
     }
     LazyLoader {
         active: root.enableDateMenu
         component: DateMenu {}
+    }
+    LazyLoader {
+        active: root.enableBar
+        component: Bar {}
     }
     LazyLoader {
         active: true
