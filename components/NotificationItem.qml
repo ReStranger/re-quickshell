@@ -77,7 +77,8 @@ Rectangle {
                 Layout.fillHeight: true
                 RowLayout {
                     StyledText {
-                        text: root.title.length > 26 ? root.title.substr(0, 23) + "..." : root.title
+                        clip: true
+                        text: root.title.length > 23 ? root.title.substr(0, 20) + "..." : root.title
                         font.pixelSize: 16
                         font.weight: Font.Bold
                         color: Theme.color.fg
