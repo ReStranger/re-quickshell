@@ -85,23 +85,6 @@ Rectangle {
 
                         Layout.fillWidth: true
                     }
-                    MouseArea {
-                        id: closeButtonArea
-                        hoverEnabled: true
-                        cursorShape: Qt.PointingHandCursor
-                        implicitWidth: closeButton.implicitWidth
-                        implicitHeight: closeButton.implicitHeight
-
-                        onClicked: root.dismiss()
-
-                        MaterialSymbol {
-                            id: closeButton
-                            anchors.centerIn: parent
-                            icon: "close"
-                            iconSize: 22
-                            color: Theme.color.fg
-                        }
-                    }
                 }
 
                 StyledText {
@@ -170,6 +153,44 @@ Rectangle {
         onEntered: root.hovered = true
         onExited: {
             root.hovered = false;
+        }
+    }
+    MouseArea {
+        id: closeButtonArea
+
+        property bool closeHovered: false
+
+        anchors {
+            top: parent.top
+            right: parent.right
+            topMargin: 5
+            rightMargin: 6
+        }
+        hoverEnabled: true
+        cursorShape: Qt.PointingHandCursor
+        implicitWidth: closeButton.implicitWidth
+        implicitHeight: closeButton.implicitHeight
+
+        onClicked: root.dismiss()
+        onEntered: closeHovered = true
+        onExited: closeHovered = false
+
+        MaterialSymbol {
+            id: closeButton
+            anchors.centerIn: parent
+            icon: "close"
+            iconSize: 22
+            color: Theme.color.fg
+
+            rotation: closeButtonArea.closeHovered ? 90 : 0
+            transformOrigin: Item.Center
+
+            Behavior on rotation {
+                NumberAnimation {
+                    duration: 250
+                    easing.type: Easing.OutCubic
+                }
+            }
         }
     }
 }
