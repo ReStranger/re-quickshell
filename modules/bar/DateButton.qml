@@ -22,9 +22,6 @@ StyledButton {
             isDateVisible = !isDateVisible;
         }
     }
-    onEntered: {
-        isDateVisible = !isDateVisible;
-    }
 
     contentItem: RowLayout {
         id: rowLayout
