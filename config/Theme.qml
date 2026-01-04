@@ -12,25 +12,25 @@ Singleton {
     property QtObject font
     property QtObject size
 
+    readonly property var palette: (Config.options.theme.darkmode ? Config.options.theme.darkColor : (Config.options.theme.lightColor || Config.options.theme.darkColor))
+
     color: QtObject {
-        // property color bg00: root.transparentize("#121214", Config.options.theme.blur / 100)
-        property color bg00: "#121214"
-        property color bg01: "#212126"
-        property color sf00: "#2a2a30"
-        property color sf01: "#373740"
-        property color sf02: "#676778"
-        property color fg: "#e9ecf2"
-        property color primary: "#f17ac6"
-        property color green: "#55b682"
-        property color blue: "#7aaaff"
-        property color orange: "#ff9c6a"
-        property color red: "#f25c5c"
-        // property color border00: root.transparentize("#eeeeee", 96 / 100)
+        property color bg00: root.palette.primaryBg
+        property color bg01: root.palette.secondaryBg
+        property color sf00: root.palette.surfacePrimaryBg
+        property color sf01: root.palette.surfaceSecondaryBg
+        property color sf02: root.palette.surfaceThirdBg
+        property color fg: root.palette.foreground
+        property color primary: root.palette.primary
+        property color green: root.palette.green
+        property color blue: root.palette.blue
+        property color orange: root.palette.orange
+        property color red: root.palette.red
         property color border00: ColorUtils.transparentize(sf01, 60 / 100)
         property color shadow: Qt.rgba(0, 0, 0, 0.4)
     }
     rounding: QtObject {
-        property int windowRounding: 15
+        property int windowRounding: Config.options.theme.rounding
         property int screenRounding: windowRounding + root.size.hyprlandGapsOut / 2
     }
     font: QtObject {
@@ -49,5 +49,6 @@ Singleton {
         property real barHeight: Config.options.bar.cornerStyle === 1 ? (baseBarHeight + root.size.hyprlandGapsOut * 2) : baseBarHeight
         property real hyprlandGapsOut: 10
         property real barIcon: 20
+        property real padding: 7.5
     }
 }

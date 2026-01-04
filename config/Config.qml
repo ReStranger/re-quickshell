@@ -76,7 +76,7 @@ Singleton {
             id: configOptionsJsonAdapter
             property JsonObject system: JsonObject {
                 property JsonObject user: JsonObject {
-                    property string name: "";
+                    property string name: ""
                 }
             }
 
@@ -84,14 +84,41 @@ Singleton {
                 property bool darkmode: true
                 property bool showBackground: true
                 // WARN: Set true only when showBackground = false
-                // WARN: Breack shadow render
+                // WARN: Break shadow render
                 property bool blur: false
                 property bool flatButton: false
+                property real rounding: 15
+                property JsonObject lightColor: JsonObject {
+                    property color primaryBg: "#121214"
+                    property color secondaryBg: "#212126"
+                    property color surfacePrimaryBg: "#2a2a30"
+                    property color surfaceSecondaryBg: "#373740"
+                    property color surfaceThirdBg: "#676778"
+                    property color fg: "#e9ecf2"
+                    property color primary: "#f17ac6"
+                    property color green: "#55b682"
+                    property color blue: "#7aaaff"
+                    property color orange: "#ff9c6a"
+                    property color red: "#f25c5c"
+                }
+                property JsonObject darkColor: JsonObject {
+                    property color primaryBg: "#121214"
+                    property color secondaryBg: "#212126"
+                    property color surfacePrimaryBg: "#2a2a30"
+                    property color surfaceSecondaryBg: "#373740"
+                    property color surfaceThirdBg: "#676778"
+                    property color foreground: "#e9ecf2"
+                    property color primary: "#f17ac6"
+                    property color green: "#55b682"
+                    property color blue: "#7aaaff"
+                    property color orange: "#ff9c6a"
+                    property color red: "#f25c5c"
+                }
             }
             property JsonObject bar: JsonObject {
                 property bool bottom: false // Instead of top
                 property int cornerStyle: 0 // 0: Hug | 1: Float | 2: Plain rectangle
-                property string launcherIcon: "rocket_launch" // Options: "distro" or any icon name in ~/.config/quickshell/ii/assets/icons
+                property string launcherIcon: "nix-snowflake" // Options: "distro" or any icon name in ~/.config/quickshell/ii/assets/icons
             }
             property JsonObject battery: JsonObject {
                 property int low: 20
