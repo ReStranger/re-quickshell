@@ -118,7 +118,11 @@ Singleton {
             property JsonObject bar: JsonObject {
                 property bool bottom: false // Instead of top
                 property int cornerStyle: 0 // 0: Hug | 1: Float | 2: Plain rectangle
-                property string launcherIcon: "nix-snowflake" // Options: "distro" or any icon name in ~/.config/quickshell/ii/assets/icons
+                property JsonObject launcher: JsonObject {
+                    property bool isMaterial: false
+                    property bool isMonochrome: false
+                    property string icon: "nix-snowflake"
+                }
             }
             property JsonObject battery: JsonObject {
                 property int low: 20

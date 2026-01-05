@@ -4,6 +4,7 @@ import qs.config
 
 StyledIconButton {
     id: root
+    material: Config.options.bar.launcher.isMaterial
     iconSize: 22
-    iconName: Config.options.bar.launcherIcon
+    iconName: Config.options.bar.launcher.icon
 }
