@@ -64,7 +64,7 @@ Scope {
 
             RowLayout {
                 id: container
-                spacing: Theme.rounding.windowRounding
+                spacing: 15
 
                 anchors {
                     left: parent.left
@@ -89,14 +89,14 @@ Scope {
                             implicitWidth: 300 + 10
                             implicitHeight: container.height + 2 * container.spacing - 30
                             color: Theme.color.sf00
-                            radius: 10
+                            radius: Theme.rounding.windowRounding
                             ScrollView {
                                 clip: true
                                 anchors {
                                     fill: parent
-                                    leftMargin: 5
                                 }
                                 Column {
+                                    padding: 5
                                     spacing: 5
                                     Repeater {
                                         id: rep
