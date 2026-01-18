@@ -18,7 +18,7 @@ Scope {
             GlobalStates.dateMenuOpen = false;
         }
 
-        readonly property real windowWidth: container.implicitWidth + container.spacing * 2
+        readonly property real windowWidth: container.implicitWidth + container.spacing * 2 + 100
         readonly property real windowHeight: container.height + 2 * container.spacing + Theme.size.hyprlandGapsOut * 2
 
         implicitWidth: windowWidth
@@ -41,6 +41,8 @@ Scope {
             anchors {
                 left: parent.left
                 right: parent.right
+                leftMargin: 50
+                rightMargin: 50
             }
 
             Behavior on y {

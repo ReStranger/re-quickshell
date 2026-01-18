@@ -24,7 +24,7 @@ Scope {
         function hide() {
             GlobalStates.qsOpen = false;
         }
-        readonly property real windowWidth: container.implicitWidth + container.spacing * 2 + Theme.size.hyprlandGapsOut
+        readonly property real windowWidth: container.implicitWidth + container.spacing * 2 + Theme.size.hyprlandGapsOut + 50
         readonly property real windowHeight: container.height + 4 * container.spacing + Theme.size.hyprlandGapsOut * 2
 
         implicitWidth: windowWidth
@@ -47,6 +47,7 @@ Scope {
                 left: parent.left
                 right: parent.right
                 rightMargin: Theme.size.hyprlandGapsOut
+                leftMargin: 50
             }
 
             Behavior on y {
