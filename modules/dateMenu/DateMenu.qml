@@ -27,6 +27,9 @@ Scope {
         mask: Region {
             item: background
         }
+        WindowShadow {
+            sourceComponent: background
+        }
 
         Rectangle {
             id: background

@@ -2,8 +2,8 @@ pragma ComponentBehavior: Bound
 
 import QtQuick
 import QtQuick.Layouts
-import qs.components
 import qs.modules.bar.systemStats
+import qs.components
 import qs.utils
 import qs.config
 
@@ -12,14 +12,13 @@ Item {
     Loader {
         active: Config.options.theme.showBackground
 
-        anchors.fill: barBackground
-        sourceComponent: RectangularDownShadow {
-            anchors.fill: undefined
-            target: barBackground
+        anchors.fill: background
+        sourceComponent: WindowShadow {
+            sourceComponent: background
         }
     }
     Rectangle {
-        id: barBackground
+        id: background
         anchors {
             fill: parent
             margins: Config.options.bar.cornerStyle === 1 ? (Theme.size.hyprlandGapsOut / 2) : 0
