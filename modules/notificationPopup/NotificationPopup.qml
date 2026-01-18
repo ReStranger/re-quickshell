@@ -18,7 +18,7 @@ Scope {
             bottom: true
         }
 
-        readonly property real barMargin: Theme.size.barHeight + Theme.size.hyprlandGapsOut
+        readonly property real barMargin: Config.options.bar.cornerStyle == 1 ? Theme.size.barHeight : Theme.size.barHeight + Theme.size.hyprlandGapsOut
 
         implicitWidth: container.implicitWidth + Theme.size.hyprlandGapsOut + 20
         // implicitHeight: container.implicitHeight + barMargin

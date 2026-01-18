@@ -32,7 +32,7 @@ Scope {
             id: background
             focus: true
             clip: true
-            readonly property real targetY: GlobalStates.dateMenuOpen ? Theme.size.barHeight + Theme.size.hyprlandGapsOut : -root.windowHeight
+            readonly property real targetY: GlobalStates.dateMenuOpen ? (Config.options.bar.cornerStyle == 1 ? Theme.size.barHeight : Theme.size.barHeight + Theme.size.hyprlandGapsOut) : -root.windowHeight
             y: targetY
 
             anchors {
