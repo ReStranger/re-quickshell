@@ -61,6 +61,11 @@ Scope {
                     onExited: exitAnim.start()
                     x: modelData.shown ? 0 : 100
 
+                    border {
+                        width: 1
+                        color: Theme.color.border00
+                    }
+
                     Component.onCompleted: {
                         if (!modelData.shown) {
                             entryAnim.start();

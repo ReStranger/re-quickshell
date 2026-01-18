@@ -26,7 +26,7 @@ Singleton {
         property color blue: root.palette.blue
         property color orange: root.palette.orange
         property color red: root.palette.red
-        property color border00: ColorUtils.transparentize(sf01, 60 / 100)
+        property color border00: ColorUtils.transparentize("#5E5C5B", 0.2)
         property color shadow: Qt.rgba(0, 0, 0, 0.4)
     }
     rounding: QtObject {

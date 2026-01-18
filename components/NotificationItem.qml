@@ -1,10 +1,11 @@
 import QtQuick
 import QtQuick.Layouts
+import QtQuick.Effects
 import Qt5Compat.GraphicalEffects
 import qs.components
 import qs.config
 
-Rectangle {
+Item {
     id: root
 
     property string title: "No app"
@@ -16,6 +17,7 @@ Rectangle {
     property bool showButtons: root.hovered && root.buttons.length > 1
 
     property var buttons: []
+    property alias border: background.border
 
     signal entered
     signal exited
@@ -24,171 +26,181 @@ Rectangle {
         root.rawNotification?.notification.dismiss();
     }
 
-    color: Theme.color.bg00
-    implicitWidth: 300
-    implicitHeight: content.implicitHeight + 20
-    radius: 15
+    implicitWidth: background.implicitWidth
+    implicitHeight: background.implicitHeight
 
-    MouseArea {
-        anchors.fill: parent
-        acceptedButtons: Qt.LeftButton
-
-        onClicked: {
-            if (root.showButtons) {
-                root.buttons[0].onClick();
-            }
-            root.dismiss();
-        }
+    WindowShadow {
+        sourceComponent: background
     }
+    Rectangle {
+        id: background
 
-    ColumnLayout {
-        id: content
-        anchors.fill: parent
-        anchors.margins: 10
-        spacing: 0
-        RowLayout {
-            Rectangle {
-                clip: true
-                Layout.preferredWidth: 50
-                Layout.preferredHeight: 50
-                radius: 100
-                border {
-                    width: 1
-                    color: Theme.color.border00
-                }
+        color: Theme.color.bg00
+        implicitWidth: 300
+        implicitHeight: content.implicitHeight + 20
+        radius: Theme.rounding.windowRounding
 
-                Image {
-                    width: 50
-                    height: 50
-                    anchors.fill: parent
-                    source: root.image
-                    fillMode: Image.PreserveAspectCrop
-                    layer.enabled: true
-                    layer.effect: OpacityMask {
-                        maskSource: Rectangle {
-                            width: 50
-                            height: 50
-                            radius: 100
+        MouseArea {
+            anchors.fill: parent
+            acceptedButtons: Qt.LeftButton
+
+            onClicked: {
+                root.buttons[0].onClick();
+                root.dismiss();
+            }
+        }
+
+        ColumnLayout {
+            id: content
+            anchors.fill: parent
+            anchors.margins: 10
+            spacing: 0
+            RowLayout {
+                Rectangle {
+                    clip: true
+                    Layout.preferredWidth: 50
+                    Layout.preferredHeight: 50
+                    radius: 100
+                    border {
+                        width: 1
+                        color: Theme.color.border00
+                    }
+
+                    Image {
+                        width: 50
+                        height: 50
+                        anchors.fill: parent
+                        source: root.image
+                        fillMode: Image.PreserveAspectCrop
+                        layer.enabled: true
+                        layer.effect: OpacityMask {
+                            maskSource: Rectangle {
+                                width: 50
+                                height: 50
+                                radius: 100
+                            }
                         }
                     }
                 }
-            }
-            ColumnLayout {
-                Layout.fillHeight: true
-                RowLayout {
+                ColumnLayout {
+                    Layout.fillHeight: true
+                    RowLayout {
+                        StyledText {
+                            clip: true
+                            text: root.title.length > 23 ? root.title.substr(0, 20) + "..." : root.title
+                            font.pixelSize: 16
+                            font.weight: Font.Bold
+                            color: Theme.color.fg
+
+                            Layout.fillWidth: true
+                        }
+                    }
+
                     StyledText {
-                        clip: true
-                        text: root.title.length > 23 ? root.title.substr(0, 20) + "..." : root.title
-                        font.pixelSize: 16
-                        font.weight: Font.Bold
+                        text: root.body.length > 37 ? root.body.substr(0, 34) + "..." : root.body
+                        visible: root.body.length > 0
+                        font.pixelSize: 12
                         color: Theme.color.fg
 
                         Layout.fillWidth: true
                     }
                 }
-
-                StyledText {
-                    text: root.body.length > 37 ? root.body.substr(0, 34) + "..." : root.body
-                    visible: root.body.length > 0
-                    font.pixelSize: 12
-                    color: Theme.color.fg
-
-                    Layout.fillWidth: true
-                }
             }
-        }
-        RowLayout {
-            id: buttonsLayout
-            clip: true
-            spacing: 10
-            opacity: root.showButtons ? 1 : 0
+            RowLayout {
+                id: buttonsLayout
+                clip: true
+                spacing: 10
+                opacity: root.showButtons ? 1 : 0
 
-            Layout.preferredHeight: root.showButtons ? 25 : 0
-            Layout.fillWidth: true
-            Layout.topMargin: root.showButtons ? 10 : 0
-
-            Behavior on Layout.preferredHeight {
-                NumberAnimation {
-                    duration: 250
-                    easing.type: Easing.OutCubic
-                }
-            }
-            Behavior on Layout.topMargin {
-                NumberAnimation {
-                    duration: 250
-                    easing.type: Easing.OutCubic
-                }
-            }
-            Behavior on opacity {
-                NumberAnimation {
-                    duration: 200
-                }
-            }
-
-            Repeater {
+                Layout.preferredHeight: root.showButtons ? 25 : 0
                 Layout.fillWidth: true
-                model: root.buttons
+                Layout.topMargin: root.showButtons ? 10 : 0
 
-                StyledButton {
-                    id: notificationButton
-                    Layout.fillWidth: true
-                    implicitHeight: 25
-                    implicitWidth: 0
-                    contentItem: StyledText {
-                        property color textColor: notificationButton.pressed ? Theme.color.bg00 : Theme.color.fg
-                        text: modelData.label
-                        fontSize: 14
-                        color: textColor
+                Behavior on Layout.preferredHeight {
+                    NumberAnimation {
+                        duration: 250
+                        easing.type: Easing.OutCubic
                     }
-                    onClicked: modelData.onClick()
+                }
+                Behavior on Layout.topMargin {
+                    NumberAnimation {
+                        duration: 250
+                        easing.type: Easing.OutCubic
+                    }
+                }
+                Behavior on opacity {
+                    NumberAnimation {
+                        duration: 200
+                    }
+                }
+
+                Repeater {
+                    Layout.fillWidth: true
+                    model: root.buttons
+
+                    StyledButton {
+                        id: notificationButton
+                        Layout.fillWidth: true
+                        implicitHeight: 25
+                        implicitWidth: 0
+                        contentItem: StyledText {
+                            property color textColor: notificationButton.pressed ? Theme.color.bg00 : Theme.color.fg
+                            text: modelData.label
+                            fontSize: 14
+                            color: textColor
+                        }
+                        onClicked: modelData.onClick()
+                    }
                 }
             }
         }
-    }
-    MouseArea {
-        anchors.fill: parent
-        hoverEnabled: true
-        acceptedButtons: Qt.NoButton
-        cursorShape: Qt.PointingHandCursor
-        onEntered: root.hovered = true
-        onExited: {
-            root.hovered = false;
+        MouseArea {
+            anchors.fill: parent
+            hoverEnabled: true
+            acceptedButtons: Qt.NoButton
+            cursorShape: Qt.PointingHandCursor
+            onEntered: root.hovered = true
+            onExited: {
+                root.hovered = false;
+            }
         }
-    }
-    MouseArea {
-        id: closeButtonArea
+        MouseArea {
+            id: closeButtonArea
 
-        property bool closeHovered: false
+            anchors {
+                top: parent.top
+                right: parent.right
+                topMargin: 5
+                rightMargin: 6
+            }
+            cursorShape: Qt.PointingHandCursor
+            implicitWidth: closeButton.implicitWidth
+            implicitHeight: closeButton.implicitHeight
 
-        anchors {
-            top: parent.top
-            right: parent.right
-            topMargin: 5
-            rightMargin: 6
-        }
-        hoverEnabled: true
-        cursorShape: Qt.PointingHandCursor
-        implicitWidth: closeButton.implicitWidth
-        implicitHeight: closeButton.implicitHeight
+            onClicked: root.dismiss()
 
-        onClicked: root.dismiss()
-        onEntered: closeHovered = true
-        onExited: closeHovered = false
+            MaterialSymbol {
+                id: closeButton
+                anchors.centerIn: parent
+                icon: "close"
+                iconSize: 22
+                color: Theme.color.fg
+                opacity: root.hovered ? 90 : 0
 
-        MaterialSymbol {
-            id: closeButton
-            anchors.centerIn: parent
-            icon: "close"
-            iconSize: 22
-            color: Theme.color.fg
+                rotation: root.hovered ? 90 : 0
+                transformOrigin: Item.Center
 
-            rotation: closeButtonArea.closeHovered ? 90 : 0
-            transformOrigin: Item.Center
-
-            Behavior on rotation {
-                NumberAnimation {
-                    duration: 250
-                    easing.type: Easing.OutCubic
+                Behavior on rotation {
+                    NumberAnimation {
+                        duration: 250
+                        easing.type: Easing.OutCubic
+                    }
+                }
+                Behavior on opacity {
+                    NumberAnimation {
+                        duration: 250
+                        easing.type: Easing.OutCubic
+                    }
                 }
             }
         }
