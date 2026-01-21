@@ -5,6 +5,7 @@ import qs.config
 
 Item {
     implicitHeight: Theme.rounding.screenRounding
+
     RoundCorner {
         id: leftCorner
         anchors {
@@ -15,6 +16,8 @@ Item {
 
         implicitSize: Theme.rounding.screenRounding
         color: Config.options.theme.showBackground ? Theme.color.bg00 : ColorUtils.transparentize(Theme.color.bg00, 0.89)
+        borderColor: Theme.color.border00
+        borderWidth: 1
 
         corner: RoundCorner.CornerEnum.TopLeft
         states: State {
@@ -25,6 +28,7 @@ Item {
             }
         }
     }
+
     RoundCorner {
         id: rightCorner
         anchors {
@@ -34,6 +38,8 @@ Item {
         }
         implicitSize: Theme.rounding.screenRounding
         color: Config.options.theme.showBackground ? Theme.color.bg00 : ColorUtils.transparentize(Theme.color.bg00, 0.89)
+        borderColor: Theme.color.border00
+        borderWidth: 1
 
         corner: RoundCorner.CornerEnum.TopRight
         states: State {
