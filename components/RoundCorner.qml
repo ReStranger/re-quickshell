@@ -13,6 +13,8 @@ Item {
 
     property int implicitSize: 25
     property color color: "#000000"
+    property color borderColor: Theme.color.border00
+    property int borderWidth: 0
 
     implicitWidth: implicitSize
     implicitHeight: implicitSize
@@ -75,6 +77,48 @@ Item {
                 y: shapePath.startY
             }
         }
-    }
+        ShapePath {
+            id: borderPath
+            strokeWidth: root.borderWidth
+            strokeColor: root.borderColor
+            fillColor: "transparent"
+            pathHints: ShapePath.PathSolid & ShapePath.PathNonIntersecting
 
+            startX: 0
+            startY: 0
+
+            PathAngleArc {
+                moveToStart: true
+                centerX: switch (root.corner) {
+                    case RoundCorner.CornerEnum.TopLeft:
+                        return root.borderWidth > 0 ? root.implicitSize - root.borderWidth / 2 : 0;
+                    case RoundCorner.CornerEnum.TopRight:
+                        return root.borderWidth > 0 ? root.borderWidth / 2 : root.implicitSize;
+                    case RoundCorner.CornerEnum.BottomLeft:
+                        return root.borderWidth > 0 ? root.implicitSize - root.borderWidth / 2 : 0;
+                    case RoundCorner.CornerEnum.BottomRight:
+                        return root.borderWidth > 0 ? root.borderWidth / 2 : root.implicitSize;
+                }
+                centerY: switch (root.corner) {
+                    case RoundCorner.CornerEnum.TopLeft:
+                        return root.borderWidth > 0 ? root.implicitSize - root.borderWidth / 2 : 0;
+                    case RoundCorner.CornerEnum.TopRight:
+                        return root.borderWidth > 0 ? root.implicitSize - root.borderWidth / 2 : 0;
+                    case RoundCorner.CornerEnum.BottomLeft:
+                        return root.borderWidth > 0 ? root.borderWidth / 2 : root.implicitSize;
+                    case RoundCorner.CornerEnum.BottomRight:
+                        return root.borderWidth > 0 ? root.borderWidth / 2 : root.implicitSize;
+                }
+                radiusX: root.borderWidth > 0 ? root.implicitSize - root.borderWidth : root.implicitSize
+                radiusY: root.borderWidth > 0 ? root.implicitSize - root.borderWidth : root.implicitSize
+                startAngle: switch (root.corner) {
+                    case RoundCorner.CornerEnum.TopLeft: return 180;
+                    case RoundCorner.CornerEnum.TopRight: return -90;
+                    case RoundCorner.CornerEnum.BottomLeft: return 90;
+                    case RoundCorner.CornerEnum.BottomRight: return 0;
+                }
+                sweepAngle: 90
+            }
+        }
+    }
 }
