@@ -54,5 +54,17 @@ Item {
             SysTray {}
             SystemIndicators {}
         }
+        Loader {
+            active: Config.options.bar.cornerStyle != 1
+            anchors {
+                top: Config.options.bar.bottom ? parent.top : parent.bottom
+                left: parent.left
+                right: parent.right
+            }
+            sourceComponent: Rectangle {
+                implicitHeight: 1
+                color: Theme.color.border00
+            }
+        }
     }
 }
