@@ -2,7 +2,6 @@ import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
 import Qt5Compat.GraphicalEffects
-import Quickshell.Io
 import Quickshell
 import Quickshell.Hyprland
 import qs.components
@@ -74,7 +73,7 @@ Scope {
 
             ColumnLayout {
                 id: container
-                spacing: Theme.rounding.windowRounding / 2
+                spacing: 7.5
 
                 anchors {
                     left: parent.left
@@ -84,9 +83,9 @@ Scope {
                 }
 
                 RowLayout {
-                    spacing: Theme.rounding.windowRounding / 2
+                    spacing: 7.5
                     Layout.alignment: Qt.AlignTop
-                    Layout.margins: Theme.rounding.windowRounding / 2
+                    Layout.margins: 7.5
                     Layout.bottomMargin: 0
 
                     Rectangle {
@@ -151,10 +150,6 @@ Scope {
                     implicitWidth: qsButtonGrid.implicitWidth + 10
                     implicitHeight: qsButtonGrid.implicitHeight + 10
                     radius: Theme.rounding.windowRounding
-                    border {
-                        width: 1
-                        color: Theme.color.border00
-                    }
                     GridLayout {
                         id: qsButtonGrid
                         anchors {
@@ -169,10 +164,7 @@ Scope {
                         QSDnd {}
                     }
                     ScrollView {
-                        Column {
-
-                        }
-
+                        Column {}
                     }
                 }
                 Rectangle {
