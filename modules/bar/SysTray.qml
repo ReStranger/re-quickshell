@@ -19,18 +19,14 @@ Item {
     implicitWidth: rowLayout.implicitWidth + 15
     implicitHeight: rowLayout.implicitHeight + 12
 
-    ShadowButton {
-        visible: !Config.options.theme.showBackground
+    Rectangle {
+        visible: !Config.options.theme.flatButton
         anchors.fill: parent
         radius: Theme.rounding.windowRounding / 1.2
-        fillColor: ColorUtils.transparentize(Theme.color.fg, 94 / 100)
-        borderColor: ColorUtils.transparentize("#eeeeee", 94 / 100)
-        borderWidth: 1
-        Behavior on fillColor {
-            ColorAnimation {
-                duration: 100
-                easing.type: Easing.Linear
-            }
+        color: ColorUtils.transparentize(Theme.color.fg, 94 / 100)
+        border {
+            color: ColorUtils.transparentize("#eeeeee", 0.90)
+            width: 1
         }
     }
 

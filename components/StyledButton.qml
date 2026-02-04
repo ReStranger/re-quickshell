@@ -45,7 +45,7 @@ MouseArea {
             radius: root.radius
             color: root.enabled ? root.determineColor() : root.disabledColor
             border {
-                color: ColorUtils.transparentize("#eeeeee", (0.90))
+                color: ColorUtils.transparentize("#eeeeee", 0.90)
                 width: 1
             }
             Behavior on color {
