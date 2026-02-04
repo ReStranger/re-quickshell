@@ -60,6 +60,8 @@ Item {
                 top: Config.options.bar.bottom ? parent.top : parent.bottom
                 left: parent.left
                 right: parent.right
+                leftMargin: Theme.rounding.screenRounding
+                rightMargin: Theme.rounding.screenRounding
             }
             sourceComponent: Rectangle {
                 implicitHeight: 1
