@@ -13,7 +13,7 @@ MouseArea {
     property alias contentItem: contentLoader.sourceComponent
 
     property color disabledColor: Theme.color.bg00
-    property color defaultColor: ColorUtils.transparentize(Theme.color.fg, 94 / 100)
+    property color defaultColor: ColorUtils.transparentize(Theme.color.fg, 0.94)
     property color hoveredColor: ColorUtils.transparentize(Theme.color.fg, 0.8)
     property color pressedColor: Theme.color.primary
     property real radius: Theme.rounding.windowRounding / 1.2
@@ -39,14 +39,16 @@ MouseArea {
         id: backgroundLoader
         active: !Config.options.theme.flatButton
         anchors.fill: parent
-        ShadowButton {
+        Rectangle {
             visible: !Config.options.theme.flatButton
             anchors.fill: parent
             radius: root.radius
-            fillColor: root.enabled ? root.determineColor() : root.disabledColor
-            borderColor: ColorUtils.transparentize("#eeeeee", 94 / 100)
-            borderWidth: 1
-            Behavior on fillColor {
+            color: root.enabled ? root.determineColor() : root.disabledColor
+            border {
+                color: ColorUtils.transparentize("#eeeeee", (0.90))
+                width: 1
+            }
+            Behavior on color {
                 ColorAnimation {
                     duration: 100
                     easing.type: Easing.Linear

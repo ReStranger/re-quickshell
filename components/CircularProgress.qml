@@ -15,7 +15,7 @@ Item {
 
     Behavior on progress {
         NumberAnimation {
-            duration: useAnim ? 250 : 0
+            duration: root.useAnim ? 250 : 0
             easing.type: Easing.OutExpo
         }
     }
