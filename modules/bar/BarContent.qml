@@ -14,7 +14,7 @@ Item {
 
         anchors.fill: background
         sourceComponent: WindowShadow {
-            sourceComponent: background
+            anchors.fill: background
         }
     }
     Rectangle {

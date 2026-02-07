@@ -1,14 +1,11 @@
 import QtQuick
 import QtQuick.Effects
 
-MultiEffect {
-    required property Item sourceComponent
-    anchors.fill: sourceComponent
-    source: sourceComponent
-    enabled: false
-    shadowEnabled: true
-    shadowColor: "#121214"
-    shadowBlur: 1
-    shadowHorizontalOffset: 2
-    shadowVerticalOffset: 3
+RectangularShadow {
+    offset.x: 2
+    offset.y: 3
+    blur: 10
+    spread: 0
+    radius: 15
+    color: "#121214"
 }

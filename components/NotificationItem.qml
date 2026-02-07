@@ -30,7 +30,7 @@ Item {
     implicitHeight: background.implicitHeight
 
     WindowShadow {
-        sourceComponent: background
+        anchors.fill: background
     }
     Rectangle {
         id: background
