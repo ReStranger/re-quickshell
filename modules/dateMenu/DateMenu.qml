@@ -100,29 +100,27 @@ Scope {
                                 anchors {
                                     fill: parent
                                 }
-                                Column {
-                                    padding: 5
+                                padding: 5
+                                ListView {
                                     spacing: 5
-                                    Repeater {
-                                        id: rep
+                                    model: ScriptModel {
+                                        values: NotificationDaemon.data.slice().reverse()
+                                    }
 
-                                        model: Array.from(NotificationDaemon.data).reverse()
+                                    delegate: NotificationItem {
+                                        id: child
 
-                                        delegate: NotificationItem {
-                                            id: child
-
-                                            title: modelData?.summary
-                                            body: modelData?.body
-                                            image: modelData?.image || modelData?.appIcon
-                                            rawNotification: modelData
-                                            tracked: true
-                                            buttons: modelData.actions.map(action => ({
-                                                        label: action.text,
-                                                        onClick: () => {
-                                                            action.invoke();
-                                                        }
-                                                    }))
-                                        }
+                                        title: modelData?.summary
+                                        body: modelData?.body
+                                        image: modelData?.image || modelData?.appIcon
+                                        rawNotification: modelData
+                                        tracked: true
+                                        buttons: modelData.actions.map(action => ({
+                                                    label: action.text,
+                                                    onClick: () => {
+                                                        action.invoke();
+                                                    }
+                                                }))
                                     }
                                 }
                             }

@@ -48,6 +48,7 @@ Singleton {
         property real baseBarHeight: 40
         property real barHeight: Config.options.bar.cornerStyle === 1 ? (baseBarHeight + root.size.hyprlandGapsOut * 2) : baseBarHeight
         property real hyprlandGapsOut: 10
+        property real notification: 300
         property real barIcon: 20
         property real padding: 7.5
     }

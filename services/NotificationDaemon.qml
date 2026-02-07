@@ -9,7 +9,6 @@ Singleton {
     id: root
 
     property list<NotificationObject> data: []
-    property list<NotificationObject> popups: data.filter(n => n.popup && !n.tracked)
 
     NotificationServer {
         id: server
