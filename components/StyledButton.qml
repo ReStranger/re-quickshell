@@ -8,7 +8,6 @@ MouseArea {
     hoverEnabled: true
     cursorShape: Qt.PointingHandCursor
 
-    property bool hovered: false
     property bool toggled: false
     property alias contentItem: contentLoader.sourceComponent
 
@@ -19,14 +18,11 @@ MouseArea {
     property real radius: Theme.rounding.windowRounding / 1.2
     property bool changeColors: true
 
-    onEntered: root.hovered = true
-    onExited: root.hovered = false
-
     function determineColor(): color {
         if (root.pressed || root.toggled) {
             return root.pressedColor;
         }
-        if (root.hovered) {
+        if (root.containsMouse) {
             return root.hoveredColor;
         }
         return root.defaultColor;

@@ -13,8 +13,7 @@ Item {
     property var rawNotification: null
     property bool tracked: false
     property string image: ""
-    property bool hovered: false
-    property bool showButtons: root.hovered && root.buttons.length > 1
+    property bool showButtons: mouseHandler.containsMouse && root.buttons.length > 1
 
     property var buttons: []
     property alias border: background.border
@@ -155,14 +154,11 @@ Item {
             }
         }
         MouseArea {
+            id: mouseHandler
             anchors.fill: parent
             hoverEnabled: true
             acceptedButtons: Qt.NoButton
             cursorShape: Qt.PointingHandCursor
-            onEntered: root.hovered = true
-            onExited: {
-                root.hovered = false;
-            }
         }
         MouseArea {
             id: closeButtonArea
@@ -185,9 +181,9 @@ Item {
                 icon: "close"
                 iconSize: 22
                 color: Theme.color.fg
-                opacity: root.hovered ? 90 : 0
+                opacity: mouseHandler.containsMouse ? 90 : 0
 
-                rotation: root.hovered ? 90 : 0
+                rotation: mouseHandler.containsMouse ? 90 : 0
                 transformOrigin: Item.Center
 
                 Behavior on rotation {
