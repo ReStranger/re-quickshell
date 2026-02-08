@@ -94,7 +94,7 @@ Singleton {
                     property color surfacePrimaryBg: "#2a2a30"
                     property color surfaceSecondaryBg: "#373740"
                     property color surfaceThirdBg: "#676778"
-                    property color fg: "#e9ecf2"
+                    property color foreground: "#e9ecf2"
                     property color primary: "#f17ac6"
                     property color green: "#55b682"
                     property color blue: "#7aaaff"
