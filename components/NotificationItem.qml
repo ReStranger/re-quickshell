@@ -148,7 +148,7 @@ Item {
                             fontSize: 14
                             color: textColor
                         }
-                        onClicked: modelData.onClick()
+                        onClicked: modelData?.onClick()
                     }
                 }
             }

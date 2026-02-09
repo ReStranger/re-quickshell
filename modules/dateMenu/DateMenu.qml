@@ -110,12 +110,12 @@ Scope {
                                     delegate: NotificationItem {
                                         id: child
 
-                                        title: modelData?.summary
-                                        body: modelData?.body
-                                        image: modelData?.image || modelData?.appIcon
+                                        title: modelData?.summary ?? ""
+                                        body: modelData?.body ?? ""
+                                        image: modelData?.image ?? modelData?.appIcon ?? ""
                                         rawNotification: modelData
                                         tracked: true
-                                        buttons: modelData.actions.map(action => ({
+                                        buttons: modelData?.actions?.map(action => ({
                                                     label: action.text,
                                                     onClick: () => {
                                                         action.invoke();

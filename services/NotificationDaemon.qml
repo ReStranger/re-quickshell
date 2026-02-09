@@ -56,13 +56,13 @@ Singleton {
 
         property bool shown: false
         required property Notification notification
-        readonly property string summary: notification?.summary || ""
-        readonly property string body: notification?.body || ""
-        readonly property string appIcon: notification?.appIcon || ""
-        readonly property string appName: notification?.appName || ""
-        readonly property string image: notification?.image || ""
+        readonly property string summary: notification?.summary ?? ""
+        readonly property string body: notification?.body ?? ""
+        readonly property string appIcon: notification?.appIcon ?? ""
+        readonly property string appName: notification?.appName ?? ""
+        readonly property string image: notification?.image ?? ""
         readonly property int urgency: notification?.urgency ?? 0
-        readonly property list<NotificationAction> actions: notification?.actions || []
+        readonly property list<NotificationAction> actions: notification?.actions ?? []
 
         readonly property Timer timer: Timer {
             running: object.notification && object.notification.actions && object.notification.actions.length >= 0
@@ -79,10 +79,6 @@ Singleton {
             function onDropped(): void {
                 if (root.data.indexOf(object) !== -1)
                     root.data.splice(root.data.indexOf(object), 1);
-            }
-
-            function onAboutToDestroy(): void {
-                object.notification.destroy();
             }
         }
         readonly property Connections conn2: Connections {
