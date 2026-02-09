@@ -147,8 +147,8 @@ Scope {
                 }
                 Rectangle {
                     color: Config.options.theme.showBackground ? Theme.color.bg01 : ColorUtils.transparentize(Theme.color.fg, 0.89)
-                    implicitWidth: qsButtonGrid.implicitWidth + 10
-                    implicitHeight: qsButtonGrid.implicitHeight + 10
+                    implicitWidth: qsButtonGrid.implicitWidth + qsButtonGrid.anchors.margins * 2
+                    implicitHeight: qsButtonGrid.implicitHeight + qsButtonGrid.anchors.margins * 2
                     radius: Theme.rounding.windowRounding
                     GridLayout {
                         id: qsButtonGrid
@@ -169,8 +169,8 @@ Scope {
                 }
                 Rectangle {
                     color: Config.options.theme.showBackground ? Theme.color.bg01 : ColorUtils.transparentize(Theme.color.fg, 0.89)
-                    implicitWidth: qsSliderColumn.implicitWidth + 10
-                    implicitHeight: qsSliderColumn.implicitHeight + 10
+                    implicitWidth: qsSliderColumn.implicitWidth + qsSliderColumn.anchors.margins * 2
+                    implicitHeight: qsSliderColumn.implicitHeight + qsSliderColumn.anchors.margins * 2
                     radius: Theme.rounding.windowRounding
                     Layout.fillWidth: true
                     ColumnLayout {
@@ -180,6 +180,7 @@ Scope {
                             margins: 5
                         }
                         Layout.fillWidth: true
+                        Layout.fillHeight: true
                         RowLayout {
                             spacing: 0
                             MaterialSymbol {
@@ -198,7 +199,6 @@ Scope {
                         }
                         RowLayout {
                             visible: Brightness.initialized
-                            y: Brightness.initialized ? -width : 0
                             spacing: 0
                             MaterialSymbol {
                                 icon: Brightness.materialSymbol
