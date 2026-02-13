@@ -27,6 +27,7 @@ Scope {
         }
         readonly property real windowWidth: container.implicitWidth + container.spacing * 2 + Theme.size.hyprlandGapsOut + 50
         readonly property real windowHeight: container.height + 4 * container.spacing + Theme.size.hyprlandGapsOut * 2
+        property bool menuOpen: false
 
         implicitWidth: windowWidth
         implicitHeight: windowHeight + Theme.size.barHeight
@@ -155,12 +156,13 @@ Scope {
                     GridLayout {
                         id: qsButtonGrid
                         anchors {
-                            top: parent.top
-                            left: parent.left
+                            fill: parent
                             margins: 5
                         }
                         columns: 2
-                        QSNetworkButton {}
+                        QSNetworkButton {
+                            onIsToggleOpenChanged: root.menuOpen = isToggleOpen
+                        }
                         QSBluetoothButton {}
                         QSPowerProfileButton {}
                         QSDnd {}
@@ -169,9 +171,19 @@ Scope {
                         Column {}
                     }
                 }
+                QSListView {
+                    id: listMenu
+                    Layout.fillWidth: true
+                    implicitHeight: root.menuOpen ? 320 : 0
+                    Behavior on implicitHeight {
+                        NumberAnimation {
+                            duration: 250
+                            easing.type: Easing.OutCubic
+                        }
+                    }
+                }
                 Rectangle {
                     color: Config.options.theme.showBackground ? Theme.color.bg01 : ColorUtils.transparentize(Theme.color.fg, 0.89)
-                    implicitWidth: qsSliderColumn.implicitWidth + qsSliderColumn.anchors.margins * 2
                     implicitHeight: qsSliderColumn.implicitHeight + qsSliderColumn.anchors.margins * 2
                     radius: Theme.rounding.windowRounding
                     Layout.fillWidth: true
@@ -216,17 +228,17 @@ Scope {
                                 onMoved: Brightness.set(value)
                             }
                         }
-                        Behavior on width {
-                            NumberAnimation {
-                                duration: 250
-                                easing.type: Easing.OutCubic
-                            }
-                        }
                     }
                 }
             }
         }
 
+        Behavior on height {
+            NumberAnimation {
+                duration: 250
+                easing.type: Easing.OutCubic
+            }
+        }
         HyprlandFocusGrab {
             id: grab
             windows: [root]
