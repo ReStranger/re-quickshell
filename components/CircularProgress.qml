@@ -55,7 +55,7 @@ Item {
         anchors.centerIn: parent
         icon: parent.icon
         color: root.foregroundColor
-        iconSize: root.iconSize
+        font.pixelSize: root.iconSize
         opacity: 1
         Behavior on opacity {
             NumberAnimation {

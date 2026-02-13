@@ -9,36 +9,31 @@ import qs.config
 
 StyledButton {
     id: root
-    acceptedButtons: Qt.LeftButton | Qt.RightButton
-    toggled: GlobalStates.dateMenuOpen
+    // acceptedButtons: Qt.LeftButton | Qt.RightButton
+    checked: GlobalStates.dateMenuOpen
 
     property bool isDateVisible
-    property color textColor: root.enabled ? ((root.toggled || root.pressed) ? Theme.color.bg00 : Theme.color.fg) : Theme.color.sf01
+    // property color textColor: root.enabled ? ((root.toggled || root.pressed) ? Theme.color.bg00 : Theme.color.fg) : Theme.color.sf01
 
-    onClicked: function (mouse) {
-        if (mouse.button === Qt.LeftButton) {
-            GlobalStates.dateMenuOpen = !GlobalStates.dateMenuOpen;
-        } else if (mouse.button === Qt.RightButton) {
-            isDateVisible = !isDateVisible;
-        }
+    onClicked: GlobalStates.dateMenuOpen = !GlobalStates.dateMenuOpen
+    altAction: () => {
+        isDateVisible = !isDateVisible;
     }
 
     contentItem: RowLayout {
         id: rowLayout
-        anchors.centerIn: parent
-        anchors.margins: 5
 
         MaterialSymbol {
             id: clockIcon
             icon: "schedule"
-            color: root.textColor
-            font.pixelSize: 20
+            color: root.foregroundColor
+            font.pixelSize: 18
         }
 
         StyledText {
             id: clockText
             text: DateTime.time
-            color: root.textColor
+            color: root.foregroundColor
             font.pixelSize: 16
             font.weight: Font.Bold
         }
@@ -46,7 +41,7 @@ StyledButton {
             id: dot
             visible: root.isDateVisible
             text: "•"
-            color: root.textColor
+            color: root.foregroundColor
             font.pixelSize: 20
         }
         StyledText {
@@ -59,7 +54,7 @@ StyledButton {
             opacity: root.isDateVisible ? 1 : 0
 
             text: Utils.capitalize(DateTime.date.weekDayShort) + " " + DateTime.date.shortDate
-            color: root.textColor
+            color: root.foregroundColor
 
             font.pixelSize: 16
             font.weight: Font.Bold

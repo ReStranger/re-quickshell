@@ -142,12 +142,8 @@ Item {
                         Layout.fillWidth: true
                         implicitHeight: 25
                         implicitWidth: 0
-                        contentItem: StyledText {
-                            property color textColor: notificationButton.pressed ? Theme.color.bg00 : Theme.color.fg
-                            text: modelData.label
-                            fontSize: 14
-                            color: textColor
-                        }
+                        text: modelData.label
+                        font.pixelSize: 14
                         onClicked: modelData?.onClick()
                     }
                 }
@@ -179,7 +175,7 @@ Item {
                 id: closeButton
                 anchors.centerIn: parent
                 icon: "close"
-                iconSize: 22
+                font.pixelSize: 22
                 color: Theme.color.fg
                 opacity: mouseHandler.containsMouse ? 90 : 0
 

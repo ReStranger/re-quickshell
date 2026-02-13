@@ -1,60 +1,136 @@
 import QtQuick
+import QtQuick.Layouts
+import QtQuick.Controls
 import qs.utils
-import qs.config
 
-MouseArea {
+Button {
     id: root
-    clip: true
-    hoverEnabled: true
-    cursorShape: Qt.PointingHandCursor
+    horizontalPadding: 8
+    verticalPadding: 6
+    implicitHeight: contentItem.implicitHeight + verticalPadding * 2
+    implicitWidth: contentItem.implicitWidth + horizontalPadding * 2
 
-    property bool toggled: false
-    property alias contentItem: contentLoader.sourceComponent
+    enum IconProvider {
+        System,
+        Material,
+        NerdFont
+    }
+    property alias radius: background.radius
+    property alias topLeftRadius: background.topLeftRadius
+    property alias topRightRadius: background.topRightRadius
+    property alias bottomLeftRadius: background.bottomLeftRadius
+    property alias bottomRightRadius: background.bottomRightRadius
+    property alias border: background.border
+    property alias horizontalAlignment: buttonText.horizontalAlignment
+    property alias buttonSpacing: contentLayout.spacing
+    property alias backgroundOpacity: background.opacity
 
-    property color disabledColor: Theme.color.bg00
-    property color defaultColor: ColorUtils.transparentize(Theme.color.fg, 0.94)
-    property color hoveredColor: ColorUtils.transparentize(Theme.color.fg, 0.8)
-    property color pressedColor: Theme.color.primary
-    property real radius: Theme.rounding.windowRounding / 1.2
-    property bool changeColors: true
+    property var provider: StyledButton.IconProvider.System
 
-    function determineColor(): color {
-        if (root.pressed || root.toggled) {
-            return root.pressedColor;
+    property real iconSize: 16
+    property color bgColor: ColorUtils.transparentize("#eeeeee", 0.94)
+    property color bgColorHover: ColorUtils.transparentize("#eeeeee", 0.85)
+    property color bgColorActive: ColorUtils.transparentize("#eeeeee", 0.75)
+    property color fgColor: "#eeeeee"
+    property color fgColorActive: "#eeeeee"
+    property color fgColorDisable: "#373740"
+    property color backgroundColor: {
+        if (!root.enabled)
+            return bgColor;
+        if (root.pressed) {
+            return root.bgColorActive;
+        } else if (root.down || root.checked) {
+            return root.bgColorHover;
+        } else if (root.hovered) {
+            return root.bgColorHover;
+        } else {
+            return root.bgColor;
         }
-        if (root.containsMouse) {
-            return root.hoveredColor;
+    }
+    property color foregroundColor: {
+        if (!root.enabled)
+            return root.fgColorDisable;
+        if (root.pressed) {
+            return root.fgColorActive;
+        } else {
+            return root.fgColor;
         }
-        return root.defaultColor;
     }
 
-    implicitWidth: contentLoader.item ? contentLoader.item.implicitWidth + 10 : 0
-    implicitHeight: contentLoader.item ? contentLoader.item.implicitHeight + 8 : 0
+    property var altAction: () => {}
+    property var middleClickAction: () => {}
 
-    Loader {
-        id: backgroundLoader
-        active: !Config.options.theme.flatButton
+    Behavior on backgroundColor {
+        ColorAnimation {
+            duration: 100
+        }
+    }
+    Behavior on foregroundColor {
+        ColorAnimation {
+            duration: 100
+        }
+    }
+
+    background: Rectangle {
+        id: background
+        radius: 12
+        color: root.backgroundColor
+
+        border {
+            color: ColorUtils.transparentize("#eeeeee", 0.90)
+            width: 1
+        }
+    }
+    MouseArea {
         anchors.fill: parent
-        Rectangle {
-            visible: !Config.options.theme.flatButton
-            anchors.fill: parent
-            radius: root.radius
-            color: root.enabled ? root.determineColor() : root.disabledColor
-            border {
-                color: ColorUtils.transparentize("#eeeeee", 0.90)
-                width: 1
+        acceptedButtons: Qt.RightButton | Qt.MiddleButton
+        cursorShape: Qt.PointingHandCursor
+        onClicked: mouse => {
+            if (mouse.button === Qt.LeftButton) {
+                root.clicked();
             }
-            Behavior on color {
-                ColorAnimation {
-                    duration: 100
-                    easing.type: Easing.Linear
-                }
-            }
+            if (mouse.button === Qt.RightButton)
+                root.altAction();
+            if (mouse.button === Qt.MiddleButton)
+                root.middleClickAction();
         }
     }
-
-    Loader {
-        id: contentLoader
-        anchors.centerIn: parent
+    contentItem: Item {
+        implicitWidth: contentLayout.implicitWidth
+        implicitHeight: contentLayout.implicitHeight
+        RowLayout {
+            id: contentLayout
+            anchors {
+                centerIn: parent
+                leftMargin: root.horizontalPadding
+                rightMargin: root.horizontalPadding
+            }
+            spacing: 5
+            StyledIcon {
+                implicitSize: root.iconSize
+                Layout.fillWidth: false
+                Layout.alignment: Qt.AlignVCenter
+                icon: root.icon.name
+                visible: root.icon.name !== "" && root.provider === StyledButton.IconProvider.System
+            }
+            MaterialSymbol {
+                implicitSize: root.iconSize
+                Layout.fillWidth: false
+                Layout.alignment: Qt.AlignVCenter
+                icon: root.icon.name
+                color: root.foregroundColor
+                visible: root.icon.name !== "" && root.provider === StyledButton.IconProvider.Material
+            }
+            StyledText {
+                id: buttonText
+                visible: root.text !== ""
+                Layout.fillWidth: true
+                Layout.alignment: Qt.AlignVCenter
+                horizontalAlignment: Text.AlignLeft
+                font: root.font
+                text: root.text
+                color: root.foregroundColor
+            }
+        }
     }
 }

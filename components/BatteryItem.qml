@@ -36,7 +36,7 @@ Item {
             MaterialSymbol {
                 visible: !Battery.onBattery
                 icon: Battery.materialSymbol
-                iconSize: 14
+                font.pixelSize: 14
                 fill: 1
                 color: "#000000"
                 Layout.alignment: Qt.AlignHCenter
@@ -45,8 +45,8 @@ Item {
             StyledText {
                 id: batteryText
                 text: Battery.batteryLvl + "%"
-                fontSize: 14
-                fontWeight: Font.Bold
+                font.pixelSize: 14
+                font.weight: Font.Bold
                 color: "#000000"
                 font.bold: Battery.isLowBattery()
                 Layout.alignment: Qt.AlignHCenter

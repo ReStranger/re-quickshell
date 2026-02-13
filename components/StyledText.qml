@@ -3,19 +3,14 @@ import qs.config
 
 Text {
     id: root
-    property real fontSize
-    property int fontWeight: Font.Normal
-    property string fontColor: Theme.color.fg
-    property string fontFamily: Theme.font.family.main
-
-    color: fontColor
+    color: Theme.color.fg
     renderType: Text.NativeRendering
     verticalAlignment: Text.AlignVCenter
 
     font {
         hintingPreference: Font.PreferFullHinting
-        family: fontFamily
-        pixelSize: fontSize
-        weight: fontWeight
+        pixelSize: 14
+        family: Theme.font.family.main
+        weight: Font.Normal
     }
 }

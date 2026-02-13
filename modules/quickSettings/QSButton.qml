@@ -17,9 +17,7 @@ Item {
     property bool toggled: false
 
     property color disabledColor: Theme.color.bg00
-    property color defaultColor: ColorUtils.transparentize(Theme.color.fg, 94 / 100)
-    property color hoveredColor: Theme.color.sf00
-    property color pressedColor: Theme.color.primary
+    property color bgColorActive: Theme.color.primary
 
     signal clicked()
 
@@ -81,15 +79,15 @@ Item {
                     spacing: 1
                     StyledText {
                         text: root.name
-                        fontSize: 14
-                        fontColor: root.toggled ? Theme.color.bg00 : Theme.color.fg
-                        fontWeight: Font.Bold
+                        font.pixelSize: 14
+                        color: root.toggled ? Theme.color.bg00 : Theme.color.fg
+                        font.weight: Font.Bold
                     }
                     StyledText {
                         visible: root.haveSubName
                         text: root.subName
-                        fontSize: 10
-                        fontColor: root.toggled ? Theme.color.bg00 : Theme.color.fg
+                        font.pixelSize: 10
+                        color: root.toggled ? Theme.color.bg00 : Theme.color.fg
                     }
                 }
             }

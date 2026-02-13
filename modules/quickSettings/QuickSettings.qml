@@ -116,12 +116,12 @@ Scope {
                     }
                     ColumnLayout {
                         StyledText {
-                            fontSize: 16
+                            font.pixelSize: 16
                             text: Config.options.system.user.name !== "" ? Config.options.system.user.name : SystemInfo.username
                             font.weight: Font.Bold
                         }
                         StyledText {
-                            fontSize: 12
+                            font.pixelSize: 12
                             text: DateTime.uptime
                         }
                     }
@@ -129,20 +129,20 @@ Scope {
                         Layout.fillWidth: true
                     }
 
-                    StyledIconButton {
+                    StyledButton {
                         iconSize: 20
-                        iconName: "settings"
-                        enabled: false
+                        icon.name: "settings"
+                        provider: StyledButton.IconProvider.Material
                     }
-
-                    StyledIconButton {
+                    StyledButton {
                         iconSize: 20
-                        iconName: "restart_alt"
+                        icon.name: "restart_alt"
+                        provider: StyledButton.IconProvider.Material
                     }
-
-                    StyledIconButton {
+                    StyledButton {
                         iconSize: 20
-                        iconName: "power_settings_new"
+                        icon.name: "power_settings_new"
+                        provider: StyledButton.IconProvider.Material
                     }
                 }
                 Rectangle {
@@ -185,7 +185,7 @@ Scope {
                             spacing: 0
                             MaterialSymbol {
                                 icon: Audio.sink.materialSymbol
-                                iconSize: 22
+                                font.pixelSize: 22
                                 color: Theme.color.fg
                                 Layout.alignment: Qt.AlignVCenter
                             }
@@ -202,7 +202,7 @@ Scope {
                             spacing: 0
                             MaterialSymbol {
                                 icon: Brightness.materialSymbol
-                                iconSize: 22
+                                font.pixelSize: 22
                                 color: Theme.color.fg
                                 Layout.alignment: Qt.AlignVCenter
                             }

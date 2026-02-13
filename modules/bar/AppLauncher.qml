@@ -2,9 +2,9 @@ import QtQuick
 import qs.components
 import qs.config
 
-StyledIconButton {
+StyledButton {
     id: root
-    material: Config.options.bar.launcher.isMaterial
+    provider: Config.options.bar.launcher.isMaterial ? StyledButton.IconProvider.Material : StyledButton.IconProvider.System
     iconSize: 22
-    iconName: Config.options.bar.launcher.icon
+    icon.name: Config.options.bar.launcher.icon
 }

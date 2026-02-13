@@ -131,32 +131,24 @@ Scope {
                     StyledButton {
                         implicitWidth: 80
                         implicitHeight: 80
-                        contentItem: StyledText {
-                            text: "left"
-                        }
+                        text: "left"
                         onClicked: Quickshell.execDetached(["sh", "-c", "notify-send \"Заголовок\" \"Основной текст\""])
                     }
                     StyledButton {
                         implicitWidth: 80
                         implicitHeight: 80
-                        contentItem: StyledText {
-                            text: "left"
-                        }
+                        text: "left"
                         onClicked: Quickshell.execDetached(["sh", "-c", "notify-send \"Заголовок\" \"Основной текст\" --action=\"key1=Кнопка 1\" --action=\"key2=Кнопка 2\""])
                     }
                     StyledButton {
                         implicitWidth: 80
                         implicitHeight: 80
-                        contentItem: StyledText {
-                            text: "left"
-                        }
+                        text: "left"
                     }
                     StyledButton {
                         implicitWidth: 80
                         implicitHeight: 80
-                        contentItem: StyledText {
-                            text: "left"
-                        }
+                        text: "left"
                     }
                 }
             }
