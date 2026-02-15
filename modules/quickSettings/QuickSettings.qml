@@ -3,6 +3,7 @@ import QtQuick.Controls
 import QtQuick.Layouts
 import Qt5Compat.GraphicalEffects
 import Quickshell
+import Quickshell.Wayland
 import Quickshell.Hyprland
 import qs.components
 import qs.services
@@ -14,6 +15,7 @@ Scope {
         id: root
         color: "transparent"
         exclusionMode: ExclusionMode.Ignore
+        WlrLayershell.namespace: "quickshell:quicksettings"
         anchors {
             top: true
             right: true
@@ -33,7 +35,7 @@ Scope {
             item: background
         }
         WindowShadow {
-            anchors.fill: background
+            target: background
         }
         Rectangle {
             id: background
@@ -57,7 +59,7 @@ Scope {
             }
 
             height: container.height + 2 * container.spacing
-            color: Config.options.theme.showBackground ? Theme.color.bg00 : ColorUtils.transparentize(Theme.color.bg00, 0.89)
+            color: Config.options.theme.showBackground ? Theme.color.bg00 : "transparent"
             radius: Theme.rounding.windowRounding
 
             border {

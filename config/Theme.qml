@@ -15,11 +15,11 @@ Singleton {
     readonly property var palette: (Config.options.theme.darkmode ? Config.options.theme.darkColor : (Config.options.theme.lightColor || Config.options.theme.darkColor))
 
     color: QtObject {
-        property color bg00: root.palette.primaryBg
-        property color bg01: root.palette.secondaryBg
-        property color sf00: root.palette.surfacePrimaryBg
-        property color sf01: root.palette.surfaceSecondaryBg
-        property color sf02: root.palette.surfaceThirdBg
+        property color bg00: ColorUtils.transparentize(root.palette.primaryBg, Config.options.theme.blur)
+        property color bg01: ColorUtils.transparentize(root.palette.secondaryBg, Config.options.theme.blur)
+        property color sf00: ColorUtils.transparentize(root.palette.surfacePrimaryBg, Config.options.theme.blur)
+        property color sf01: ColorUtils.transparentize(root.palette.surfaceSecondaryBg, Config.options.theme.blur)
+        property color sf02: ColorUtils.transparentize(root.palette.surfaceThirdBg, Config.options.theme.blur)
         property color fg: root.palette.foreground
         property color primary: root.palette.primary
         property color green: root.palette.green

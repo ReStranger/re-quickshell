@@ -81,7 +81,7 @@ Scope {
                             }
                         }
                     }
-                    sourceComponent:  ScreenCorners {}
+                    sourceComponent: ScreenCorners {}
                 }
             }
         }
