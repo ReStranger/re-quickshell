@@ -28,7 +28,7 @@ Scope {
             item: background
         }
         WindowShadow {
-            anchors.fill: background
+            target: background
         }
 
         Rectangle {

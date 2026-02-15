@@ -29,7 +29,7 @@ Item {
     implicitHeight: background.implicitHeight
 
     WindowShadow {
-        anchors.fill: background
+        target: background
     }
     Rectangle {
         id: background
