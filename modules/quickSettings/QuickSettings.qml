@@ -34,9 +34,9 @@ Scope {
         mask: Region {
             item: background
         }
-        WindowShadow {
-            target: background
-        }
+        // WindowShadow {
+        //     target: background
+        // }
         Rectangle {
             id: background
             focus: true

@@ -28,9 +28,9 @@ Item {
     implicitWidth: background.implicitWidth
     implicitHeight: background.implicitHeight
 
-    WindowShadow {
-        target: background
-    }
+    // WindowShadow {
+    //     target: background
+    // }
     Rectangle {
         id: background
 

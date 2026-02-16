@@ -9,15 +9,15 @@ import qs.config
 
 Item {
     id: root
-    Loader {
-        active: Config.options.theme.showBackground
-
-        anchors.fill: background
-        sourceComponent: WindowShadow {
-            anchors.fill: undefined
-            target: background
-        }
-    }
+    // Loader {
+    //     active: Config.options.theme.showBackground
+    //
+    //     anchors.fill: background
+    //     sourceComponent: WindowShadow {
+    //         anchors.fill: undefined
+    //         target: background
+    //     }
+    // }
     Rectangle {
         id: background
         anchors {
