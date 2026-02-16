@@ -15,6 +15,7 @@ Singleton {
     readonly property var palette: (Config.options.theme.darkmode ? Config.options.theme.darkColor : (Config.options.theme.lightColor || Config.options.theme.darkColor))
 
     color: QtObject {
+        property color bg00na: root.palette.primaryBg
         property color bg00: ColorUtils.transparentize(root.palette.primaryBg, Config.options.theme.blur)
         property color bg01: ColorUtils.transparentize(root.palette.secondaryBg, Config.options.theme.blur)
         property color sf00: ColorUtils.transparentize(root.palette.surfacePrimaryBg, Config.options.theme.blur)

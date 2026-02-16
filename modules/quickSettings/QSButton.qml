@@ -19,7 +19,7 @@ Item {
     property color disabledColor: Theme.color.bg00
     property color bgColorActive: Theme.color.primary
 
-    signal clicked()
+    signal clicked
 
     RowLayout {
         spacing: 0
@@ -71,7 +71,7 @@ Item {
                     anchors.verticalCenter: parent.verticalCenter
                     font.pixelSize: 22
                     icon: root.icon
-                    color: root.toggled ? Theme.color.bg00 : Theme.color.fg
+                    color: root.toggled ? Theme.color.bg00na : Theme.color.fg
                 }
                 ColumnLayout {
                     anchors.left: menuIcon.right
@@ -80,14 +80,14 @@ Item {
                     StyledText {
                         text: root.name
                         font.pixelSize: 14
-                        color: root.toggled ? Theme.color.bg00 : Theme.color.fg
+                        color: root.toggled ? Theme.color.bg00na : Theme.color.fg
                         font.weight: Font.Bold
                     }
                     StyledText {
                         visible: root.haveSubName
                         text: root.subName
                         font.pixelSize: 10
-                        color: root.toggled ? Theme.color.bg00 : Theme.color.fg
+                        color: root.toggled ? Theme.color.bg00na : Theme.color.fg
                     }
                 }
             }
@@ -140,7 +140,7 @@ Item {
                     anchors.centerIn: parent
                     font.pixelSize: 25
                     icon: "keyboard_arrow_right"
-                    color: root.toggled ? Theme.color.bg00 : Theme.color.fg
+                    color: root.toggled ? Theme.color.bg00na : Theme.color.fg
                     rotation: root.isToggleOpen ? 90 : 0
                     Behavior on rotation {
                         NumberAnimation {
