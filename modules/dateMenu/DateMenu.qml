@@ -2,6 +2,7 @@ import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
 import Quickshell
+import Quickshell.Wayland
 import Quickshell.Hyprland
 import qs.components
 import qs.services
@@ -12,6 +13,7 @@ Scope {
         id: root
         color: "transparent"
         exclusionMode: ExclusionMode.Ignore
+        WlrLayershell.namespace: "quickshell:datemenu"
         anchors.top: true
 
         function hide() {
