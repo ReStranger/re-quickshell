@@ -71,15 +71,9 @@ Button {
         }
     }
 
-    background: Rectangle {
+    background: StyledRectangle {
         id: background
-        radius: 12
         color: root.backgroundColor
-
-        border {
-            color: ColorUtils.transparentize("#eeeeee", 0.90)
-            width: 1
-        }
     }
     MouseArea {
         anchors.fill: parent
