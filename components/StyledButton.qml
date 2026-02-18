@@ -5,8 +5,8 @@ import qs.utils
 
 Button {
     id: root
-    horizontalPadding: 8
-    verticalPadding: 6
+    horizontalPadding: 6
+    verticalPadding: 4
     implicitHeight: contentItem.implicitHeight + verticalPadding * 2
     implicitWidth: contentItem.implicitWidth + horizontalPadding * 2
 

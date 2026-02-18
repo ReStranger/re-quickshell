@@ -15,8 +15,8 @@ StyledButton {
     property var bar: root.QsWindow.window
 
     visible: SystemTray.items
-    implicitWidth: rowLayout.implicitWidth + 15
-    implicitHeight: rowLayout.implicitHeight + 12
+    implicitWidth: rowLayout.implicitWidth + 14
+    implicitHeight: rowLayout.implicitHeight + 14
 
     RowLayout {
         id: rowLayout
@@ -37,7 +37,7 @@ StyledButton {
                 acceptedButtons: Qt.LeftButton | Qt.RightButton
                 cursorShape: Qt.PointingHandCursor
                 implicitWidth: 16
-                implicitHeight: 20
+                implicitHeight: 16
 
                 onClicked: event => {
                     switch (event.button) {
