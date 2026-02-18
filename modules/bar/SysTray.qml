@@ -6,10 +6,9 @@ import Quickshell.Services.SystemTray
 import Quickshell.Widgets
 import QtQuick.Layouts
 import qs.components
-import qs.utils
 import qs.config
 
-Item {
+StyledButton {
     id: root
 
     readonly property Repeater items: items
@@ -18,17 +17,6 @@ Item {
     visible: SystemTray.items
     implicitWidth: rowLayout.implicitWidth + 15
     implicitHeight: rowLayout.implicitHeight + 12
-
-    Rectangle {
-        visible: !Config.options.theme.flatButton
-        anchors.fill: parent
-        radius: Theme.rounding.windowRounding / 1.2
-        color: ColorUtils.transparentize(Theme.color.fg, 94 / 100)
-        border {
-            color: ColorUtils.transparentize("#eeeeee", 0.90)
-            width: 1
-        }
-    }
 
     RowLayout {
         id: rowLayout
@@ -47,6 +35,7 @@ Item {
                 required property SystemTrayItem modelData
 
                 acceptedButtons: Qt.LeftButton | Qt.RightButton
+                cursorShape: Qt.PointingHandCursor
                 implicitWidth: 16
                 implicitHeight: 20
 
