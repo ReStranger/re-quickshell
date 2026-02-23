@@ -83,7 +83,7 @@ Singleton {
             property JsonObject theme: JsonObject {
                 property bool darkmode: true
                 property bool showBackground: true
-                property real blur: 0.11
+                property real blur: 0.4
                 property bool flatButton: false
                 property real rounding: 15
                 property JsonObject lightColor: JsonObject {
