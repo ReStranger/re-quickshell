@@ -13,18 +13,19 @@ Slider {
         x: root.leftPadding
         y: root.topPadding + root.availableHeight / 2 - height / 2
         implicitWidth: 200
-        implicitHeight: 14
+        implicitHeight: 12
         width: root.availableWidth
         height: implicitHeight
         radius: Theme.rounding.windowRounding
-        color: Theme.color.sf01
-        border.color: Theme.color.bg01
+        color: Theme.color.bg01
+        border.color: ColorUtils.transparentize("#eeeeee", 0.90)
 
         Rectangle {
             width: root.visualPosition * (parent.width - 12) + 10
             height: parent.height
             color: Theme.color.primary
             radius: Theme.rounding.windowRounding
+            border.color: ColorUtils.transparentize("#eeeeee", 0.90)
         }
     }
 
@@ -39,51 +40,11 @@ Slider {
         Rectangle {
             id: normal
             anchors.centerIn: parent
-            width: 14
-            height: 14
-            radius: Theme.rounding.windowRounding / 2
-            color: Theme.color.primary
-            visible: !root.pressed
-        }
-
-        Item {
-            id: pressedFx
-            anchors.centerIn: parent
-            width: 16
+            width: 25
             height: 16
-            visible: root.pressed
-            opacity: root.pressed ? 1 : 0
-
-            Rectangle {
-                anchors.fill: parent
-                radius: width / 2
-                color: Theme.color.primary
-            }
-
-            Rectangle {
-                anchors.centerIn: parent
-                width: parent.width * 0.70
-                height: width
-                radius: width / 2
-                color: "transparent"
-                border.width: parent.width * 0.10
-                border.color: ColorUtils.transparentize(Theme.color.sf01, 0.4)
-            }
-
-            Rectangle {
-                anchors.centerIn: parent
-                width: parent.width * 0.08
-                height: width
-                radius: width / 2
-                border.color: ColorUtils.transparentize(Theme.color.sf01, 0.4)
-            }
-
-            Behavior on scale {
-                NumberAnimation {
-                    duration: 120
-                }
-            }
-            scale: root.pressed ? 1.0 : 0.85
+            radius: Theme.rounding.windowRounding / 2
+            color: Theme.color.fg
+            border.color: Theme.color.border00
         }
     }
 }
