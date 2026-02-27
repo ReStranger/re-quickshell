@@ -9,6 +9,7 @@ Button {
     verticalPadding: 4
     implicitHeight: contentItem.implicitHeight + verticalPadding * 2
     implicitWidth: contentItem.implicitWidth + horizontalPadding * 2
+    scale: pressed ? 0.975 : 1
 
     enum IconProvider {
         System,
@@ -68,6 +69,12 @@ Button {
     Behavior on foregroundColor {
         ColorAnimation {
             duration: 100
+        }
+    }
+    Behavior on scale {
+        NumberAnimation {
+            duration: 150
+            easing.type: Easing.OutCubic
         }
     }
 
