@@ -16,6 +16,9 @@ Scope {
         WlrLayershell.namespace: "quickshell:datemenu"
         anchors.top: true
 
+        readonly property int sideMargin: 50
+        readonly property int contentPadding: 5
+
         function hide() {
             GlobalStates.dateMenuOpen = false;
         }
@@ -37,14 +40,17 @@ Scope {
             id: background
             focus: true
             clip: true
-            readonly property real targetY: GlobalStates.dateMenuOpen ? (Config.options.bar.cornerStyle == 1 ? Theme.size.barHeight : Theme.size.barHeight + Theme.size.hyprlandGapsOut) : -root.windowHeight
-            y: targetY
+            readonly property real openY: Config.options.bar.cornerStyle == 1
+                                        ? Theme.size.barHeight
+                                        : Theme.size.barHeight + Theme.size.hyprlandGapsOut
+            readonly property real closedY: -root.windowHeight
+            y: GlobalStates.dateMenuOpen ? openY : closedY
 
             anchors {
                 left: parent.left
                 right: parent.right
-                leftMargin: 50
-                rightMargin: 50
+                leftMargin: root.sideMargin
+                rightMargin: root.sideMargin
             }
 
             Behavior on y {
@@ -77,59 +83,35 @@ Scope {
                     left: parent.left
                     right: parent.right
                     bottom: parent.bottom
-                    margins: container.spacing
+                    margins: spacing
                 }
 
-                ColumnLayout {
-                    id: grid
-                    Layout.alignment: Qt.AlignTop
-                    Layout.preferredHeight: parent.height
-                    spacing: 10
+                Rectangle {
+                    id: notificationsPane
+                    implicitWidth: 310
+                    implicitHeight: container.height + 2 * container.spacing - 30
+                    color: Theme.color.sf00
+                    radius: Theme.rounding.windowRounding
 
-                    GridLayout {
-                        columns: 2
-                        rowSpacing: 10
-                        columnSpacing: rowSpacing
-                        Layout.alignment: Qt.AlignTop
+                    ScrollView {
+                        clip: true
+                        anchors.fill: parent
+                        padding: root.contentPadding
 
-                        Rectangle {
-                            implicitWidth: 300 + 10
-                            implicitHeight: container.height + 2 * container.spacing - 30
-                            color: Theme.color.sf00
-                            radius: Theme.rounding.windowRounding
-                            ScrollView {
-                                clip: true
-                                anchors {
-                                    fill: parent
-                                }
-                                padding: 5
-                                ListView {
-                                    spacing: 5
-                                    model: ScriptModel {
-                                        values: NotificationDaemon.data.slice().reverse()
-                                    }
-
-                                    delegate: NotificationItem {
-                                        id: child
-
-                                        title: modelData?.summary ?? ""
-                                        body: modelData?.body ?? ""
-                                        image: modelData?.image ?? modelData?.appIcon ?? ""
-                                        rawNotification: modelData
-                                        tracked: true
-                                        buttons: modelData?.actions?.map(action => ({
-                                                    label: action.text,
-                                                    onClick: () => {
-                                                        action.invoke();
-                                                    }
-                                                }))
-                                    }
-                                }
+                        ListView {
+                            spacing: 0
+                            boundsBehavior: Flickable.StopAtBounds
+                            model: ScriptModel {
+                                values: NotificationDaemon.data.slice().reverse()
                             }
+
+                            delegate: NotificationRow {}
                         }
                     }
                 }
+
                 ColumnLayout {
+                    id: actionsColumn
                     StyledButton {
                         implicitWidth: 80
                         implicitHeight: 80
