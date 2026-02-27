@@ -149,84 +149,86 @@ Scope {
                     }
                 }
                 Rectangle {
-                    color: Config.options.theme.showBackground ? Theme.color.bg01 : ColorUtils.transparentize(Theme.color.fg, 0.89)
-                    implicitWidth: qsButtonGrid.implicitWidth + qsButtonGrid.anchors.margins * 2
-                    implicitHeight: qsButtonGrid.implicitHeight + qsButtonGrid.anchors.margins * 2
-                    radius: Theme.rounding.windowRounding
-                    GridLayout {
-                        id: qsButtonGrid
-                        anchors {
-                            fill: parent
-                            margins: 5
-                        }
-                        columns: 2
-                        QSNetworkButton {
-                            onIsToggleOpenChanged: root.menuOpen = isToggleOpen
-                        }
-                        QSBluetoothButton {}
-                        QSPowerProfileButton {}
-                        QSDnd {}
-                    }
-                    ScrollView {
-                        Column {}
-                    }
-                }
-                QSListView {
-                    id: listMenu
                     Layout.fillWidth: true
-                    implicitHeight: root.menuOpen ? 320 : 0
-                    Behavior on implicitHeight {
-                        NumberAnimation {
-                            duration: 250
-                            easing.type: Easing.OutCubic
-                        }
+                    implicitHeight: 1
+                    color: Theme.color.border00
+                }
+                GridLayout {
+                    id: qsButtonGrid
+                    columns: 2
+                    QSNetworkButton {
+                        onIsToggleOpenChanged: root.menuOpen = isToggleOpen
                     }
+                    QSBluetoothButton {}
+                    QSPowerProfileButton {}
+                    QSDnd {}
                 }
                 Rectangle {
-                    color: Config.options.theme.showBackground ? Theme.color.bg01 : ColorUtils.transparentize(Theme.color.fg, 0.89)
-                    implicitHeight: qsSliderColumn.implicitHeight + qsSliderColumn.anchors.margins * 2
-                    radius: Theme.rounding.windowRounding
                     Layout.fillWidth: true
-                    ColumnLayout {
-                        id: qsSliderColumn
-                        anchors {
-                            fill: parent
-                            margins: 5
-                        }
+                    implicitHeight: 1
+                    color: Theme.color.border00
+                }
+                ColumnLayout {
+                    id: qsSliderColumn
+                    Layout.fillWidth: true
+                    Layout.fillHeight: true
+                    RowLayout {
                         Layout.fillWidth: true
-                        Layout.fillHeight: true
-                        RowLayout {
-                            spacing: 0
-                            MaterialSymbol {
-                                icon: Audio.sink.materialSymbol
-                                font.pixelSize: 22
-                                color: Theme.color.fg
-                                Layout.alignment: Qt.AlignVCenter
-                            }
-                            StyledSlider {
-                                value: Audio.sink.volume
-                                from: 0
-                                to: 1
-                                stepSize: 0.05
-                                onMoved: Audio.sink.setVolume(value)
-                            }
+                        ThinText {
+                            Layout.fillWidth: true
+                            text: "Brightness"
+                            font.weight: 100
+                            color: ColorUtils.transparentize(Theme.color.fg, 0.4)
                         }
-                        RowLayout {
-                            visible: Brightness.initialized
-                            spacing: 0
-                            MaterialSymbol {
-                                icon: Brightness.materialSymbol
-                                font.pixelSize: 22
-                                color: Theme.color.fg
-                                Layout.alignment: Qt.AlignVCenter
-                            }
-                            StyledSlider {
-                                value: Brightness.value
-                                from: 0
-                                to: 1
-                                stepSize: 0.05
-                                onMoved: Brightness.set(value)
-                            }
+                        ThinText {
+                            text: Brightness.value + "%"
+                            font.weight: 100
+                            color: ColorUtils.transparentize(Theme.color.fg, 0.4)
+                        }
+                    }
+                    RowLayout {
+                        // visible: Brightness.initialized
+                        spacing: 0
+                        MaterialSymbol {
+                            icon: Brightness.materialSymbol
+                            font.pixelSize: 22
+                            color: Theme.color.fg
+                            Layout.alignment: Qt.AlignVCenter
+                        }
+                        StyledSlider {
+                            value: Brightness.value
+                            from: 0
+                            to: 1
+                            stepSize: 0.05
+                            onMoved: Brightness.set(value)
+                        }
+                    }
+                    RowLayout {
+                        Layout.fillWidth: true
+                        ThinText {
+                            Layout.fillWidth: true
+                            text: "Volume"
+                        }
+                        ThinText {
+                            text: Brightness.value + "%"
+                            font.weight: 100
+                            color: ColorUtils.transparentize(Theme.color.fg, 0.4)
+                        }
+                    }
+                    RowLayout {
+                        spacing: 0
+                        MaterialSymbol {
+                            icon: Audio.sink.materialSymbol
+                            font.pixelSize: 22
+                            color: Theme.color.fg
+                            Layout.alignment: Qt.AlignVCenter
+                        }
+                        StyledSlider {
+                            value: Audio.sink.volume
+                            from: 0
+                            to: 1
+                            stepSize: 0.05
+                            onMoved: Audio.sink.setVolume(value)
                         }
                     }
                 }
