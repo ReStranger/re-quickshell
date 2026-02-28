@@ -181,7 +181,7 @@ Scope {
                             color: ColorUtils.transparentize(Theme.color.fg, 0.4)
                         }
                         ThinText {
-                            text: Brightness.value + "%"
+                            text: Utils.normalizedToPercent(Brightness.value) + "%"
                             font.weight: 100
                             color: ColorUtils.transparentize(Theme.color.fg, 0.4)
                         }
@@ -210,7 +210,7 @@ Scope {
                             text: "Volume"
                         }
                         ThinText {
-                            text: Brightness.value + "%"
+                            text: Utils.normalizedToPercent(Audio.sink.volume) + "%"
                             font.weight: 100
                             color: ColorUtils.transparentize(Theme.color.fg, 0.4)
                         }
