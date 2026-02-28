@@ -15,6 +15,18 @@ Singleton {
         return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
     }
 
+    /**
+     * Converts a normalized value into an integer percent (0..100).
+     * Values outside the range are clamped; null/undefined becomes 0.
+     *
+     * @param {number} value - Normalized value.
+     * @returns {number} Percent value in range 0..100.
+     */
+    function normalizedToPercent(value) {
+        const n = Math.max(0, Math.min(1, value ?? 0));
+        return Math.round(n * 100);
+    }
+
     function formatSeconds(s) {
         const day = Math.floor(s / 86400);
         const hours = Math.floor(s / 3600) % 24;
