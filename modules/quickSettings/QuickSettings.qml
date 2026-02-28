@@ -148,10 +148,8 @@ Scope {
                         provider: StyledButton.IconProvider.Material
                     }
                 }
-                Rectangle {
+                LineSeparator {
                     Layout.fillWidth: true
-                    implicitHeight: 1
-                    color: Theme.color.border00
                 }
                 GridLayout {
                     id: qsButtonGrid
@@ -163,10 +161,8 @@ Scope {
                     QSPowerProfileButton {}
                     QSDnd {}
                 }
-                Rectangle {
+                LineSeparator {
                     Layout.fillWidth: true
-                    implicitHeight: 1
-                    color: Theme.color.border00
                 }
                 ColumnLayout {
                     id: qsSliderColumn
