@@ -44,7 +44,7 @@ Item {
         border.width: 0
     }
 
-    Rectangle {
+    LineSeparator {
         id: separator
         visible: !root.isLast
         anchors {
@@ -52,8 +52,5 @@ Item {
             left: parent.left
             right: parent.right
         }
-        implicitHeight: 1
-        color: Theme.color.border00
-        opacity: 0.8
     }
 }
