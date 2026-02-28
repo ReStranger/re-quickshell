@@ -195,7 +195,7 @@ Scope {
                             value: Brightness.value
                             from: 0
                             to: 1
-                            stepSize: 0.05
+                            stepSize: 0.01
                             onMoved: Brightness.set(value)
                         }
                     }
@@ -223,7 +223,7 @@ Scope {
                             value: Audio.sink.volume
                             from: 0
                             to: 1
-                            stepSize: 0.05
+                            stepSize: 0.01
                             onMoved: Audio.sink.setVolume(value)
                         }
                     }
