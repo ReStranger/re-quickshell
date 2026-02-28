@@ -27,6 +27,15 @@ Singleton {
         return Math.round(n * 100);
     }
 
+    /**
+     * Formats a duration in seconds into a short human readable string.
+     *
+     * Output format: "<Xd> <Yh> <Zm>". Zero components are omitted, except
+     * minutes which are always included when there are no larger components.
+     *
+     * @param {number} s - Duration in seconds.
+     * @returns {string} Formatted duration string.
+     */
     function formatSeconds(s) {
         const day = Math.floor(s / 86400);
         const hours = Math.floor(s / 3600) % 24;
