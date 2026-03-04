@@ -104,13 +104,15 @@ Scope {
                                 }
                                 padding: 5
                                 ListView {
-                                    spacing: 5
+                                    spacing: 2
                                     model: ScriptModel {
                                         values: NotificationDaemon.data.slice().reverse()
                                     }
 
                                     delegate: NotificationItem {
                                         id: child
+                                        readonly property bool isFirst: index === 0
+                                        readonly property bool isLast: ListView.view ? index === (ListView.view.count - 1) : true
 
                                         title: modelData?.summary ?? ""
                                         body: modelData?.body ?? ""
@@ -123,6 +125,10 @@ Scope {
                                                         action.invoke();
                                                     }
                                                 }))
+                                        topLeftRadius: isFirst ? Theme.rounding.windowRounding : 5
+                                        topRightRadius: isFirst ? Theme.rounding.windowRounding : 5
+                                        bottomLeftRadius: isLast ? Theme.rounding.windowRounding : 5
+                                        bottomRightRadius: isLast ? Theme.rounding.windowRounding : 5
                                     }
                                 }
                             }

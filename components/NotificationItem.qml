@@ -17,6 +17,10 @@ Item {
 
     property var buttons: []
     property alias border: background.border
+    property alias topLeftRadius: background.topLeftRadius
+    property alias topRightRadius: background.topRightRadius
+    property alias bottomLeftRadius: background.bottomLeftRadius
+    property alias bottomRightRadius: background.bottomRightRadius
 
     signal entered
     signal exited
@@ -46,6 +50,26 @@ Item {
             onClicked: {
                 root.buttons[0].onClick();
                 root.dismiss();
+            }
+        }
+        Behavior on topLeftRadius {
+            NumberAnimation {
+                duration: 250
+            }
+        }
+        Behavior on topRightRadius {
+            NumberAnimation {
+                duration: 250
+            }
+        }
+        Behavior on bottomLeftRadius {
+            NumberAnimation {
+                duration: 250
+            }
+        }
+        Behavior on bottomRightRadius {
+            NumberAnimation {
+                duration: 250
             }
         }
 
