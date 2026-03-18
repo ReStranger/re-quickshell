@@ -108,9 +108,13 @@ Item {
                 ColumnLayout {
                     Layout.fillHeight: true
                     RowLayout {
+                        Layout.fillWidth: true
                         StyledText {
                             clip: true
-                            text: root.title.length > 23 ? root.title.substr(0, 20) + "..." : root.title
+                            text: root.title
+                            wrapMode: Text.NoWrap
+                            maximumLineCount: 1
+                            elide: Text.ElideRight
                             font.pixelSize: 16
                             font.weight: Font.Bold
                             color: Theme.color.fg
@@ -120,8 +124,12 @@ Item {
                     }
 
                     StyledText {
-                        text: root.body.length > 37 ? root.body.substr(0, 34) + "..." : root.body
+                        clip: true
+                        text: root.body
                         visible: root.body.length > 0
+                        wrapMode: Text.NoWrap
+                        maximumLineCount: 1
+                        elide: Text.ElideRight
                         font.pixelSize: 12
                         color: Theme.color.fg
 
