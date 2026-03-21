@@ -12,12 +12,18 @@ import qs.modules.bar
 import qs.modules.quickSettings
 import qs.modules.dateMenu
 import qs.modules.notificationPopup
+import qs.modules.background
 
 ShellRoot {
     id: root
     property bool enableBar: true
     property bool enableQS: true
     property bool enableDateMenu: true
+    property bool enableBackground: true
+    LazyLoader {
+        active: root.enableBackground
+        component: Background {}
+    }
     LazyLoader {
         active: root.enableQS
         component: QuickSettings {}
