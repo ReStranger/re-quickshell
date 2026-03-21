@@ -137,6 +137,9 @@ Singleton {
                     property bool dnd: true
                 }
             }
+            property JsonObject background: JsonObject {
+                property string wallpaperPath: ""
+            }
         }
     }
 }
